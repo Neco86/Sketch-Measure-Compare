@@ -7,7 +7,7 @@ DEMO: https://neco86.github.io/Sketch-Measure-Compare/
 ```
 
 ```js
-const injectScript = document.createElement('script');
-injectScript.src = "https://neco86.github.io/Sketch-Measure-Compare/inject.js";
-document.querySelector('head').appendChild(injectScript);
+const script = document.createElement('script');
+script.src = "https://neco86.github.io/Sketch-Measure-Compare/inject.js";
+document.querySelector('head').appendChild(script);
 ```
