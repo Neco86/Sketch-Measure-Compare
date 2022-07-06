@@ -27,9 +27,6 @@
         toggleBtnWrapper.style.height = '0';
         toggleBtnWrapper.style.top = '0';
         toggleBtnWrapper.style.left = '0';
-        toggleBtnWrapper.onmousemove = (e) => {
-            console.log(e);
-        };
         const toggleBtn = document.createElement('div');
         toggleBtn.innerText = 'UI';
         toggleBtn.style.position = 'fixed';
