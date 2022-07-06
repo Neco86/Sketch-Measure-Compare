@@ -49,7 +49,7 @@
     </head>
     <body>
         <div id="placeholder">
-            <div>Please Choose UI Folder</div>
+            <div>Please Choose UI Folder!</div>
             <br/>
             <input
                 type="file"
@@ -107,12 +107,13 @@
                 }
             };
             const handleClear = () => {
-                iframe.src = '';
-                uploader.value = '';
+                URL.revokeObjectURL(iframe.src);
                 fileList.forEach((file) => {
                     URL.revokeObjectURL(file.url);
                 });
                 fileList = [];
+                iframe.src = '';
+                uploader.value = '';
                 placeholder.style.display = 'block';
                 iframe.style.display = 'none';
                 clear.style.display = 'none';
