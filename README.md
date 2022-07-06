@@ -15,6 +15,6 @@ document.querySelector('head').appendChild(injectScript);
 
 // 可选(更详细的标尺内容)
 const rulersScript = document.createElement('script');
-rulersScript.src = "https://neco86.github.io/Sketch-Measure-Compare/inject.js";
+rulersScript.src = "https://neco86.github.io/Sketch-Measure-Compare/rulers.js";
 document.querySelector('head').appendChild(rulersScript);
 ```
