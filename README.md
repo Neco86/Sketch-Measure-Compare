@@ -1,2 +1,13 @@
 # Sketch-Measure-Compare
-compare ui and result
+
+DEMO: https://neco86.github.io/Sketch-Measure-Compare/
+
+```html
+<script src="https://neco86.github.io/Sketch-Measure-Compare/inject.js"></script>
+```
+
+```js
+const script = document.createElement('script');
+script.src = "https://neco86.github.io/Sketch-Measure-Compare/inject.js";
+document.querySelector('head').appendChild(script);
+```
