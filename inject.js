@@ -20,6 +20,10 @@
                 document.body.appendChild(iframe);
             });
 
+        document.addEventListener('beforeunload', () => {
+            URL.revokeObjectURL(iframe.src);
+        });
+
         const toggleBtnWrapper = document.createElement('div');
         toggleBtnWrapper.style.position = 'fixed';
         toggleBtnWrapper.style.zIndex = '10000';
