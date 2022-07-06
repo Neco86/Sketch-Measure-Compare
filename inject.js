@@ -43,6 +43,7 @@
         toggleBtn.style.color = '#fff';
         toggleBtn.style.height = '26px';
         toggleBtn.style.lineHeight = '26px';
+        toggleBtn.style.fontSize = '16px';
         let shiftX = 0;
         let shiftY = 0;
         let isMoving = false;
