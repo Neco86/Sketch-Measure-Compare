@@ -210,6 +210,162 @@ setTimeout(() => {
         };
         handleScreenChange();
 
+        window.addEventListener('message', ({ data }) => {
+            if (!data || !data.msg) {
+                return;
+            }
+            if (msg === 'updateRulers') {
+                setStyle(rulers, { display: flowMode.checked ? 'none' : '' });
+                setStyle(rulers.childNodes[0], {
+                    left: `${payload.left}px`,
+                    width: `${payload.width}px`,
+                });
+                setStyle(rulers.childNodes[1], {
+                    top: `${payload.top}px`,
+                    height: `${payload.height}px`,
+                });
+
+                setStyle(newRulers, {
+                    display: flowMode.checked ? 'none' : '',
+                });
+                // left
+                setStyle(newRulers.childNodes[0], {
+                    left: `${payload.left}px`,
+                });
+                // top
+                setStyle(newRulers.childNodes[1], {
+                    top: `${payload.top}px`,
+                });
+                // right
+                setStyle(newRulers.childNodes[2], {
+                    left: `${payload.left + payload.width}px`,
+                });
+                // bottom
+                setStyle(newRulers.childNodes[3], {
+                    top: `${payload.top + payload.height}px`,
+                });
+
+                const isSelected = selectedRulers.style.display !== 'none';
+                if (isSelected) {
+                    const left = parseFloat(
+                        selectedRulers.childNodes[0].style.left
+                    );
+                    const top = parseFloat(
+                        selectedRulers.childNodes[1].style.top
+                    );
+                    const right = parseFloat(
+                        selectedRulers.childNodes[2].style.left
+                    );
+                    const bottom = parseFloat(
+                        selectedRulers.childNodes[3].style.top
+                    );
+
+                    const hoverLeft = payload.left;
+                    const hoverTop = payload.top;
+                    const hoverRight = payload.left + payload.width;
+                    const hoverBottom = payload.top + payload.height;
+
+                    const isShow =
+                        hoverLeft || hoverTop || hoverRight || hoverBottom;
+
+                    if (hoverRight <= left) {
+                        setStyle(ld, {
+                            display: isShow ? '' : 'none',
+                            left: `${hoverRight}px`,
+                            top: `${top + (bottom - top) / 2}px`,
+                            width: `${left - hoverRight}px`,
+                        });
+                    } else {
+                        setStyle(ld, {
+                            display: hoverLeft < right && isShow ? '' : 'none',
+                            left: `${hoverLeft < left ? hoverLeft : left}px`,
+                            top: `${top + (bottom - top) / 2}px`,
+                            width: `${Math.abs(hoverLeft - left)}px`,
+                        });
+                    }
+                    ld.childNodes[0].dataset.width = ld.style.width;
+
+                    if (hoverLeft >= right) {
+                        setStyle(rd, {
+                            display: isShow ? '' : 'none',
+                            left: `${right}px`,
+                            top: `${top + (bottom - top) / 2}px`,
+                            width: `${hoverLeft - right}px`,
+                        });
+                    } else {
+                        setStyle(rd, {
+                            display: hoverRight > left && isShow ? '' : 'none',
+                            left: `${
+                                hoverRight > right ? right : hoverRight
+                            }px`,
+                            top: `${top + (bottom - top) / 2}px`,
+                            width: `${Math.abs(hoverRight - right)}px`,
+                        });
+                    }
+                    rd.childNodes[0].dataset.width = rd.style.width;
+
+                    if (hoverBottom <= top) {
+                        setStyle(td, {
+                            display: isShow ? '' : 'none',
+                            left: `${left + (right - left) / 2}px`,
+                            top: `${hoverBottom}px`,
+                            height: `${top - hoverBottom}px`,
+                        });
+                    } else {
+                        setStyle(td, {
+                            display: hoverTop < bottom && isShow ? '' : 'none',
+                            left: `${left + (right - left) / 2}px`,
+                            top: `${hoverTop < top ? hoverTop : top}px`,
+                            height: `${Math.abs(hoverTop - top)}px`,
+                        });
+                    }
+                    td.childNodes[0].dataset.height = td.style.height;
+
+                    if (hoverTop >= bottom) {
+                        setStyle(bd, {
+                            display: isShow ? '' : 'none',
+                            left: `${left + (right - left) / 2}px`,
+                            top: `${bottom}px`,
+                            height: `${hoverTop - bottom}px`,
+                        });
+                    } else {
+                        setStyle(bd, {
+                            display: hoverBottom > top && isShow ? '' : 'none',
+                            left: `${left + (right - left) / 2}px`,
+                            top: `${
+                                hoverBottom > bottom ? bottom : hoverBottom
+                            }px`,
+                            height: `${Math.abs(hoverBottom - bottom)}px`,
+                        });
+                    }
+                    bd.childNodes[0].dataset.height = bd.style.height;
+                }
+            }
+        });
+
+        document.onkeyup = (e) => {
+            if (e.key === 'c' && !flowMode.checked) {
+                setStyle(selectedRulers, { display: '' });
+                // left
+                setStyle(selectedRulers.childNodes[0], {
+                    left: newRulers.childNodes[0].style.left,
+                });
+                // top
+                setStyle(selectedRulers.childNodes[1], {
+                    top: newRulers.childNodes[1].style.top,
+                });
+                // right
+                setStyle(selectedRulers.childNodes[2], {
+                    left: newRulers.childNodes[2].style.left,
+                });
+                // bottom
+                setStyle(selectedRulers.childNodes[3], {
+                    top: newRulers.childNodes[3].style.top,
+                });
+                wrapper.click();
+            }
+        };
+
         const screenObserver = new MutationObserver(handleScreenChange);
         screenObserver.observe(screen, {
             attributes: true,
