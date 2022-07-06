@@ -214,6 +214,7 @@ setTimeout(() => {
             if (!data || !data.msg) {
                 return;
             }
+            const { msg, payload } = data;
             if (msg === 'updateRulers') {
                 setStyle(rulers, { display: flowMode.checked ? 'none' : '' });
                 setStyle(rulers.childNodes[0], {
