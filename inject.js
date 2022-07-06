@@ -37,6 +37,8 @@
         toggleBtn.style.padding = '2px 14px';
         toggleBtn.style.borderRadius = '3px';
         toggleBtn.style.color = '#fff';
+        toggleBtn.style.height = '26px';
+        toggleBtn.style.lineHeight = '26px';
         let shiftX = 0;
         let shiftY = 0;
         let isMoving = false;
