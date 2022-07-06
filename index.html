@@ -86,6 +86,7 @@
                                     .join('/');
                                 res = res.replace(path, `${file.url}#`);
                             });
+                            res = res.replace('./blob', 'blob');
                             return res;
                         })
                         .then((res) => {
