@@ -24,6 +24,13 @@ setTimeout(() => {
         iframe.src =
             localStorage.getItem('SKETCH_MEASURE_EXTENSION_IFRAME_SRC') ||
             'https://m.baidu.com/';
+        iframe.onload = () => {
+            if (iframe.contentDocument) {
+                const script = document.createElement('script');
+                script.src = "https://neco86.github.io/Sketch-Measure-Compare/rulers.js";
+                iframe.contentDocument.querySelector('head').appendChild(script);
+            }
+        }
 
         const iframeSrc = document.createElement('input');
         setStyle(iframeSrc, {
