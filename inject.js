@@ -36,8 +36,12 @@
         toggleBtn.innerText = 'UI';
         toggleBtn.style.position = 'fixed';
         toggleBtn.style.zIndex = '10000';
-        toggleBtn.style.top = 'calc(100vh - 50px)';
-        toggleBtn.style.left = 'calc(100vw - 43px)';
+        toggleBtn.style.top =
+            localStorage.getItem('SKETCH_MEASURE_COMPARE_TOP') ||
+            'calc(100vh - 50px)';
+        toggleBtn.style.left =
+            localStorage.getItem('SKETCH_MEASURE_COMPARE_LEFT') ||
+            'calc(100vw - 43px)';
         toggleBtn.style.backgroundColor = '#04BE02';
         toggleBtn.style.padding = '2px 14px';
         toggleBtn.style.borderRadius = '3px';
@@ -80,6 +84,14 @@
             if (isMoving) {
                 toggleBtn.style.left = e.clientX - shiftX + 'px';
                 toggleBtn.style.top = e.clientY - shiftY + 'px';
+                localStorage.setItem(
+                    'SKETCH_MEASURE_COMPARE_LEFT',
+                    toggleBtn.style.left
+                );
+                localStorage.setItem(
+                    'SKETCH_MEASURE_COMPARE_TOP',
+                    toggleBtn.style.top
+                );
             }
         };
         toggleBtn.ontouchstart = ({ touches: [e] }) => {
@@ -89,6 +101,14 @@
         toggleBtnWrapper.ontouchmove = ({ touches: [e] }) => {
             toggleBtn.style.left = e.clientX - shiftX + 'px';
             toggleBtn.style.top = e.clientY - shiftY + 'px';
+            localStorage.setItem(
+                'SKETCH_MEASURE_COMPARE_LEFT',
+                toggleBtn.style.left
+            );
+            localStorage.setItem(
+                'SKETCH_MEASURE_COMPARE_TOP',
+                toggleBtn.style.top
+            );
         };
         toggleBtnWrapper.appendChild(toggleBtn);
         document.body.appendChild(toggleBtnWrapper);
