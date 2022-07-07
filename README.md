@@ -1,5 +1,7 @@
 # Sketch-Measure-Compare
 
+This is a tool for easy comparison of UI and web pages
+
 ## Guide
 
 ### Step1: Installation
