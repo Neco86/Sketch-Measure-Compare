@@ -81,7 +81,6 @@
         };
 
         toggleBtnWrapper.appendChild(toggleBtn);
-        window.top.SKETCH_MEASURE_COMPARE.toggleBtn = toggleBtn;
 
         fetch('https://neco86.github.io/Sketch-Measure-Compare/')
             .then((res) => res.text())
@@ -92,6 +91,7 @@
                 document.body.appendChild(iframe);
                 document.body.appendChild(toggleBtnWrapper);
                 window.top.SKETCH_MEASURE_COMPARE.iframe = iframe;
+                window.top.SKETCH_MEASURE_COMPARE.toggleBtn = toggleBtn;
             });
 
         document.addEventListener('beforeunload', () => {
