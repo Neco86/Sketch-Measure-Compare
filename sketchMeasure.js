@@ -30,7 +30,7 @@ setTimeout(() => {
                 script.src =
                     'https://neco86.github.io/Sketch-Measure-Compare/rulers.js';
                 iframe.contentDocument
-                    .querySelector('head')
+                    .head
                     .appendChild(script);
             }
         };
