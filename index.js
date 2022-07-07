@@ -25,7 +25,7 @@
                             .join('/');
                         res = res.replace(path, `${file.url}#`);
                     });
-                    res = res.replace(/\.blob/g, 'blob');
+                    res = res.replace(/\.\/blob/g, 'blob');
                     return res;
                 })
                 .then((res) => {
