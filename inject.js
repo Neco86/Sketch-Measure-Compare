@@ -11,7 +11,7 @@
         iframe.style.zIndex = '9999';
         iframe.style.display = 'none';
 
-        fetch('https://neco86.github.io/Sketch-Measure-Compare')
+        fetch('https://neco86.github.io/Sketch-Measure-Compare/')
             .then((res) => res.text())
             .then((html) => {
                 const blob = new Blob([html], { type: 'text/html' });
@@ -44,6 +44,8 @@
         toggleBtn.style.height = '26px';
         toggleBtn.style.lineHeight = '26px';
         toggleBtn.style.fontSize = '16px';
+        toggleBtn.style.userSelect = 'none';
+        toggleBtn.style.webkitUserSelect = 'none';
         let shiftX = 0;
         let shiftY = 0;
         let isMoving = false;
@@ -78,6 +80,14 @@
                 toggleBtn.style.top = e.clientY - shiftY + 'px';
             }
         };
+        toggleBtn.ontouchstart = ({touches: [e]}) => {
+            shiftX = e.clientX - toggleBtn.getBoundingClientRect().left;
+            shiftY = e.clientY - toggleBtn.getBoundingClientRect().top;
+        };
+        toggleBtnWrapper.ontouchmove = ({touches: [e]}) => {
+            toggleBtn.style.left = e.clientX - shiftX + 'px';
+            toggleBtn.style.top = e.clientY - shiftY + 'px';
+        }
         toggleBtnWrapper.appendChild(toggleBtn);
         document.body.appendChild(toggleBtnWrapper);
     }
