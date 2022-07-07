@@ -8,22 +8,8 @@
         iframe.style.top = '0';
         iframe.style.left = '0';
         iframe.style.border = 'none';
-        iframe.style.zIndex = '9999';
+        iframe.style.zIndex = '10000';
         iframe.style.display = 'none';
-
-        fetch('https://neco86.github.io/Sketch-Measure-Compare/')
-            .then((res) => res.text())
-            .then((html) => {
-                const blob = new Blob([html], { type: 'text/html' });
-                const url = URL.createObjectURL(blob);
-                iframe.src = url;
-                document.body.appendChild(iframe);
-                window.top.SKETCH_MEASURE_COMPARE.iframe = iframe;
-            });
-
-        document.addEventListener('beforeunload', () => {
-            URL.revokeObjectURL(iframe.src);
-        });
 
         const toggleBtnWrapper = document.createElement('div');
         toggleBtnWrapper.style.position = 'fixed';
@@ -32,6 +18,7 @@
         toggleBtnWrapper.style.height = '0';
         toggleBtnWrapper.style.top = '0';
         toggleBtnWrapper.style.left = '0';
+
         const toggleBtn = document.createElement('div');
         toggleBtn.innerText = 'UI';
         toggleBtn.style.position = 'fixed';
@@ -47,11 +34,13 @@
         toggleBtn.style.fontSize = '16px';
         toggleBtn.style.userSelect = 'none';
         toggleBtn.style.webkitUserSelect = 'none';
+
         let shiftX = 0;
         let shiftY = 0;
         let isMoving = false;
         let mouseDownX = 0;
         let mouseDownY = 0;
+
         toggleBtn.onclick = (e) => {
             const isClick =
                 Math.abs(toggleBtn.getBoundingClientRect().left - mouseDownX) <
@@ -90,8 +79,23 @@
             toggleBtn.style.left = e.clientX - shiftX + 'px';
             toggleBtn.style.top = e.clientY - shiftY + 'px';
         };
+
         toggleBtnWrapper.appendChild(toggleBtn);
-        document.body.appendChild(toggleBtnWrapper);
         window.top.SKETCH_MEASURE_COMPARE.toggleBtn = toggleBtn;
+
+        fetch('https://neco86.github.io/Sketch-Measure-Compare/')
+            .then((res) => res.text())
+            .then((html) => {
+                const blob = new Blob([html], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                iframe.src = url;
+                document.body.appendChild(iframe);
+                document.body.appendChild(toggleBtnWrapper);
+                window.top.SKETCH_MEASURE_COMPARE.iframe = iframe;
+            });
+
+        document.addEventListener('beforeunload', () => {
+            URL.revokeObjectURL(iframe.src);
+        });
     }
 })();
