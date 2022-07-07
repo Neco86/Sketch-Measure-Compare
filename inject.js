@@ -1,6 +1,6 @@
 (() => {
-    if (!window.SKETCH_MEASURE_COMPARE) {
-        window.SKETCH_MEASURE_COMPARE = true;
+    if (!window.top.SKETCH_MEASURE_COMPARE) {
+        window.top.SKETCH_MEASURE_COMPARE = {};
         const init = () => {
             const iframe = document.createElement('iframe');
             iframe.style.width = '100vw';
@@ -19,6 +19,7 @@
                     const url = URL.createObjectURL(blob);
                     iframe.src = url;
                     document.body.appendChild(iframe);
+                    window.top.SKETCH_MEASURE_COMPARE.iframe = iframe;
                 });
 
             document.addEventListener('beforeunload', () => {
@@ -52,14 +53,14 @@
             let isMoving = false;
             let mouseDownX = 0;
             let mouseDownY = 0;
-            toggleBtn.onclick = () => {
+            toggleBtn.onclick = (e) => {
                 const isClick =
                     Math.abs(
                         toggleBtn.getBoundingClientRect().left - mouseDownX
                     ) < 1 ||
                     Math.abs(
                         toggleBtn.getBoundingClientRect().top - mouseDownY
-                    ) < 1;
+                    ) < 1 || !e?.isTrusted;
                 if (isClick) {
                     iframe.style.display =
                         iframe.style.display === 'none' ? 'block' : 'none';
@@ -93,6 +94,7 @@
             };
             toggleBtnWrapper.appendChild(toggleBtn);
             document.body.appendChild(toggleBtnWrapper);
+            window.top.SKETCH_MEASURE_COMPARE.toggleBtn = toggleBtn;
         };
         if (document.readyState === 'complete') {
             init();
