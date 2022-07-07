@@ -10,10 +10,12 @@ script.src = "https://neco86.github.io/Sketch-Measure-Compare/inject.js";
 document.head.appendChild(script);
 ```
 
-### Step2: Click UI button to toggle UI;
+### Step2: Click the UI button to switch the current page to the file selection page
 
 ### Step3: Choose files
 
 Click `upload` button to upload local sketch measure folder;
 
-![image-demo](https://neco86.github.io/Sketch-Measure-Compare/demo.png)
+### Step4: Compare UI and your website page
+
+![demo](https://neco86.github.io/Sketch-Measure-Compare/demo.png)
