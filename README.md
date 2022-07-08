@@ -10,7 +10,7 @@ A tool for easy comparison of UI and web pages
 const script = document.createElement('script');
 script.src = "https://neco86.github.io/Sketch-Measure-Compare/inject.js";
 script.onload = () => {
-  sketchMeasureCompare.init({zIndex: 10000});
+    sketchMeasureCompare.init({zIndex: 10000});
 };
 ```
 
