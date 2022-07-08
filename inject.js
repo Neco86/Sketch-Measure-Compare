@@ -2,83 +2,103 @@
     if (!window.top.SKETCH_MEASURE_COMPARE) {
         window.top.SKETCH_MEASURE_COMPARE = {};
         const iframe = document.createElement('iframe');
-        iframe.style.width = '100vw';
-        iframe.style.height = '100vh';
-        iframe.style.position = 'fixed';
-        iframe.style.top = '0';
-        iframe.style.left = '0';
-        iframe.style.border = 'none';
-        iframe.style.zIndex = '10000';
-        iframe.style.display = 'none';
+        const setStyle = (ele, obj) => {
+            Object.keys(obj).forEach((key) => {
+                ele.style[key] = obj[key];
+            });
+        };
+
+        setStyle(iframe, {
+            width: '100vw',
+            height: '100vh',
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            border: 'none',
+            zIndex: '10000',
+            display: 'none',
+        });
 
         const toggleBtnWrapper = document.createElement('div');
-        toggleBtnWrapper.style.position = 'fixed';
-        toggleBtnWrapper.style.zIndex = '10000';
-        toggleBtnWrapper.style.width = '100vw';
-        toggleBtnWrapper.style.height = '0';
-        toggleBtnWrapper.style.top = '0';
-        toggleBtnWrapper.style.left = '0';
+        setStyle(toggleBtnWrapper, {
+            position: 'fixed',
+            zIndex: '10000',
+            width: '100vw',
+            height: '0',
+            top: '0',
+            left: '0'
+        });
 
         const toggleBtn = document.createElement('div');
+        setStyle(toggleBtn, {
+            position: 'fixed',
+            zIndex: '10000',
+            right: '0',
+            bottom: '40px',
+            backgroundColor: '#04BE02',
+            padding: '2px 14px',
+            borderRadius: '3px',
+            color: '#fff',
+            height: '26px',
+            lineHeight: '26px',
+            fontSize: '16px',
+            userSelect: 'none',
+            webkitUserSelect: 'none'
+        });
         toggleBtn.innerText = 'UI';
-        toggleBtn.style.position = 'fixed';
-        toggleBtn.style.zIndex = '10000';
-        toggleBtn.style.top = 'calc(100vh - 50px)';
-        toggleBtn.style.left = 'calc(100vw - 43px)';
-        toggleBtn.style.backgroundColor = '#04BE02';
-        toggleBtn.style.padding = '2px 14px';
-        toggleBtn.style.borderRadius = '3px';
-        toggleBtn.style.color = '#fff';
-        toggleBtn.style.height = '26px';
-        toggleBtn.style.lineHeight = '26px';
-        toggleBtn.style.fontSize = '16px';
-        toggleBtn.style.userSelect = 'none';
-        toggleBtn.style.webkitUserSelect = 'none';
 
         let shiftX = 0;
         let shiftY = 0;
         let isMoving = false;
         let mouseDownX = 0;
         let mouseDownY = 0;
+        let screenHeight = 0;
+        let screenWidth = 0;
 
         toggleBtn.onclick = (e) => {
-            const isClick =
-                Math.abs(toggleBtn.getBoundingClientRect().left - mouseDownX) <
-                    1 ||
-                Math.abs(toggleBtn.getBoundingClientRect().top - mouseDownY) <
-                    1 ||
-                !e?.isTrusted;
+            const { left, top } = toggleBtn.getBoundingClientRect();
+            const isClick = Math.abs(left - mouseDownX) < 1 || Math.abs(top - mouseDownY) < 1 || !e?.isTrusted;
             if (isClick) {
-                iframe.style.display =
-                    iframe.style.display === 'none' ? 'block' : 'none';
+                iframe.style.display = iframe.style.display === 'none' ? 'block' : 'none';
             }
         };
-        toggleBtn.onmousedown = (e) => {
+
+        const handleMouseDown = (e) => {
             toggleBtnWrapper.style.height = '100vh';
-            mouseDownX = toggleBtn.getBoundingClientRect().left;
-            mouseDownY = toggleBtn.getBoundingClientRect().top;
-            shiftX = e.clientX - mouseDownX;
-            shiftY = e.clientY - mouseDownY;
+            const { left, top, width, height } = toggleBtn.getBoundingClientRect();
+            const { width: wrapperWidth, height: wrapperHeight } = toggleBtnWrapper.getBoundingClientRect();
+            mouseDownX = left;
+            mouseDownY = top;
+            screenHeight = wrapperHeight;
+            screenWidth = wrapperWidth;
+            const clientX = e?.touches?.[0]?.clientX ?? e?.clientX;
+            const clientY = e?.touches?.[0]?.clientY ?? e?.clientY;
+            shiftX = clientX - mouseDownX - width;
+            shiftY = clientY - mouseDownY - height;
             isMoving = true;
         };
-        toggleBtnWrapper.onmouseup = () => {
+
+        const handleMouseUp = () => {
             toggleBtnWrapper.style.height = '0';
             isMoving = false;
-        };
-        toggleBtnWrapper.onmousemove = (e) => {
+        }
+
+        const handleMouseMove = (e) => {
+            e.preventDefault();
             if (isMoving) {
-                toggleBtn.style.left = e.clientX - shiftX + 'px';
-                toggleBtn.style.top = e.clientY - shiftY + 'px';
+                const clientX = e?.touches?.[0]?.clientX ?? e?.clientX;
+                const clientY = e?.touches?.[0]?.clientY ?? e?.clientY;
+                toggleBtn.style.right = screenWidth - clientX + shiftX + 'px';
+                toggleBtn.style.bottom = screenHeight - clientY + shiftY + 'px';
             }
-        };
-        toggleBtn.ontouchstart = ({ touches: [e] }) => {
-            shiftX = e.clientX - toggleBtn.getBoundingClientRect().left;
-            shiftY = e.clientY - toggleBtn.getBoundingClientRect().top;
-        };
-        toggleBtnWrapper.ontouchmove = ({ touches: [e] }) => {
-            toggleBtn.style.left = e.clientX - shiftX + 'px';
-            toggleBtn.style.top = e.clientY - shiftY + 'px';
-        };
+        }
+
+        toggleBtn.onmousedown = handleMouseDown;
+        toggleBtnWrapper.onmousemove = handleMouseMove;
+        toggleBtnWrapper.onmouseup = handleMouseUp;
+        toggleBtn.ontouchstart = handleMouseDown;
+        toggleBtnWrapper.ontouchmove = handleMouseMove;
+        toggleBtnWrapper.ontouchend = handleMouseUp;
 
         toggleBtnWrapper.appendChild(toggleBtn);
 
