@@ -4,7 +4,7 @@
   "author": "Neco86@github.com",
   "license": "MIT",
   "scripts": {
-    "build": "chmod +x ./build.sh && ./build.s"
+    "build": "chmod +x ./build.sh && ./build.sh"
   },
   "devDependencies": {
     "uglify-js": "^3.16.2",
