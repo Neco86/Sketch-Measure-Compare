@@ -23,4 +23,4 @@ Click `upload` button to upload local sketch measure folder;
 
 ### Step4: Compare UI and your website page
 
-![demo](https://neco86.github.io/Sketch-Measure-Compare/demo.png)
+![demo](https://raw.githubusercontent.com/Neco86/Sketch-Measure-Compare/main/demo.png)
