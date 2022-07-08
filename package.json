@@ -1,0 +1,13 @@
+{
+  "name": "sketch-measure-compare",
+  "version": "1.0.0",
+  "author": "Neco",
+  "license": "MIT",
+  "scripts": {
+    "build": "./build.sh"
+  },
+  "devDependencies": {
+    "uglify-js": "^3.16.2",
+    "uglifycss": "^0.0.29"
+  }
+}
