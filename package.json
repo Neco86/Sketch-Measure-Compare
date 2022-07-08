@@ -1,10 +1,10 @@
 {
   "name": "sketch-measure-compare",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "author": "Neco86@github.com",
   "license": "MIT",
   "scripts": {
-    "build": "./build.sh"
+    "build": "chmod +x ./build.sh && ./build.s"
   },
   "devDependencies": {
     "uglify-js": "^3.16.2",
