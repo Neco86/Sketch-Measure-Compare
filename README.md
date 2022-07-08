@@ -12,6 +12,7 @@ script.onload = () => {
     sketchMeasureCompare.init({zIndex: 10000});
 };
 script.src = "https://neco86.github.io/Sketch-Measure-Compare/inject.js";
+document.head.appendChild(script);
 ```
 
 ### Step2: Click the UI button to switch the current page to the file selection page
