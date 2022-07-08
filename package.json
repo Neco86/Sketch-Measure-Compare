@@ -1,7 +1,7 @@
 {
   "name": "sketch-measure-compare",
   "version": "1.0.0",
-  "author": "Neco",
+  "author": "Neco86@github.com",
   "license": "MIT",
   "scripts": {
     "build": "./build.sh"
@@ -9,5 +9,6 @@
   "devDependencies": {
     "uglify-js": "^3.16.2",
     "uglifycss": "^0.0.29"
-  }
+  },
+  "homepage": "https://neco86.github.io/Sketch-Measure-Compare"
 }
