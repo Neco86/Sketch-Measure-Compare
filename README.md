@@ -8,10 +8,10 @@ A tool for easy comparison of UI and web pages
 
 ```js
 const script = document.createElement('script');
-script.src = "https://neco86.github.io/Sketch-Measure-Compare/inject.js";
 script.onload = () => {
     sketchMeasureCompare.init({zIndex: 10000});
 };
+script.src = "https://neco86.github.io/Sketch-Measure-Compare/inject.js";
 ```
 
 ### Step2: Click the UI button to switch the current page to the file selection page
