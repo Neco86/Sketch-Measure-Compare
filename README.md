@@ -7,9 +7,14 @@ A tool for easy comparison of UI and web pages
 ### Step1: Installation
 
 ```js
-const script = document.createElement('script');
-script.src = "https://neco86.github.io/Sketch-Measure-Compare/inject.js";
-document.head.appendChild(script);
+if (!window.top.sketchMeasureCompare) {
+  const script = document.createElement('script');
+  script.src = "https://neco86.github.io/Sketch-Measure-Compare/inject.js";
+  script.onload = () => {
+    window.top.sketchMeasureCompare.init({zIndex: 10000});
+  };
+  document.head.appendChild(script);
+}
 ```
 
 ### Step2: Click the UI button to switch the current page to the file selection page
