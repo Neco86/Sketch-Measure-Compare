@@ -113,7 +113,7 @@
 
             toggleBtnWrapper.appendChild(toggleBtn);
 
-            fetch('https://neco86.github.io/Sketch-Measure-Compare/dist/index.html')
+            fetch('https://neco86.github.io/Sketch-Measure-Compare/index.html')
                 .then((res) => res.text())
                 .then((html) => {
                     const blob = new Blob([html], { type: 'text/html' });

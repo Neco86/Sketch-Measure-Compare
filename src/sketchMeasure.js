@@ -28,7 +28,7 @@ setTimeout(() => {
             if (iframe.contentDocument) {
                 const script = document.createElement('script');
                 script.src =
-                    'https://neco86.github.io/Sketch-Measure-Compare/dist/rulers.min.js';
+                    'https://neco86.github.io/Sketch-Measure-Compare/rulers.min.js';
                 iframe.contentDocument
                     .head
                     .appendChild(script);

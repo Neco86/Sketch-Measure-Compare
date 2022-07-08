@@ -31,7 +31,7 @@
                 .then((res) => {
                     res = res.replace(
                         '</head>',
-                        `<script src="https://neco86.github.io/Sketch-Measure-Compare/dist/sketchMeasure.min.js"><\/script></head>`
+                        `<script src="https://neco86.github.io/Sketch-Measure-Compare/sketchMeasure.min.js"><\/script></head>`
                     );
                     return res;
                 })
