@@ -21,9 +21,7 @@ setTimeout(() => {
         });
         iframe.width = '100%';
         iframe.height = '100%';
-        iframe.src =
-            localStorage.getItem('SKETCH_MEASURE_EXTENSION_IFRAME_SRC') ||
-            'https://m.baidu.com/';
+        iframe.src = window.top.location.href;
         iframe.onload = () => {
             if (iframe.contentDocument) {
                 const script = document.createElement('script');
@@ -45,10 +43,6 @@ setTimeout(() => {
         iframeSrc.value = iframe.src;
         iframeSrc.oninput = (e) => {
             iframe.src = e.target.value;
-            localStorage.setItem(
-                'SKETCH_MEASURE_EXTENSION_IFRAME_SRC',
-                iframe.src
-            );
         };
         iframeSrc.onkeyup = (e) => {
             if (e.key === 'Enter') {
