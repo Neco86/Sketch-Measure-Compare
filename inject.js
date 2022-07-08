@@ -2,7 +2,7 @@
     if (!window.sketchMeasureCompare) {
         window.sketchMeasureCompare = {};
         window.sketchMeasureCompare.init = ({
-            zIndex = 1000
+            zIndex = 10000
         } = {}) => {
             const iframe = document.createElement('iframe');
             const setStyle = (ele, obj) => {
