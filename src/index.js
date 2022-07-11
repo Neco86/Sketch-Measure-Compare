@@ -8,7 +8,14 @@
         if (!files.length) {
             return;
         }
-        fileList = [...files].map((file) => ({
+        fileList = [...files];
+        const isIncludeIndex = !!fileList.find((t) => t.name === 'index.html');
+        if (!isIncludeIndex) {
+            uploader.value = '';
+            alert('UI: index.html Not Found!');
+            return;
+        }
+        fileList = fileList.map((file) => ({
             name: file.name,
             path: file.webkitRelativePath.replace(/^.*?\//, ''),
             url: URL.createObjectURL(file),
