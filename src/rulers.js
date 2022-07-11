@@ -37,7 +37,9 @@
             addMouseHoverEvent(doc);
             const iframeList = document.querySelectorAll('iframe');
             iframeList.forEach((iframe) => {
-                init(iframe.contentWindow.document);
+                if (iframe.contentDocument) {
+                    init(iframe.contentDocument);
+                }
             });
         };
         handleDocumentChange();
