@@ -5,18 +5,20 @@ import css from './url/css';
 import html from './url/html';
 import init from './init';
 
-const sketchMeasureCompare = {};
+class SketchMeasureCompare {
+    constructor() {
+        this.init = init;
+    }
+}
+SketchMeasureCompare.prototype.rulers = rulers;
+SketchMeasureCompare.prototype.sketchMeasure = sketchMeasure;
+SketchMeasureCompare.prototype.js = js;
+SketchMeasureCompare.prototype.css = css;
+SketchMeasureCompare.prototype.html = html;
 
 if (!window.top.sketchMeasureCompare) {
+    const sketchMeasureCompare = new SketchMeasureCompare();
     window.top.sketchMeasureCompare = sketchMeasureCompare;
-
-    sketchMeasureCompare.rulers = rulers;
-    sketchMeasureCompare.sketchMeasure = sketchMeasure;
-    sketchMeasureCompare.js = js;
-    sketchMeasureCompare.css = css;
-    sketchMeasureCompare.html = html;
-
-    sketchMeasureCompare.init = init;
 
     if (process.env.NODE_ENV === 'development') {
         console.log(sketchMeasureCompare);
