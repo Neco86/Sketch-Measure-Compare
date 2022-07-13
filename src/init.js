@@ -105,17 +105,7 @@ export default ({ zIndex = 10000 } = {}) => {
 
     toggleBtnWrapper.appendChild(toggleBtn);
 
-    fetch(window.top.sketchMeasureCompare.html)
-        .then((res) => res.text())
-        .then((html) => {
-            const blob = new Blob([html], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            iframe.src = url;
-            document.body.appendChild(iframe);
-            document.body.appendChild(toggleBtnWrapper);
-        });
-
-    document.addEventListener('beforeunload', () => {
-        URL.revokeObjectURL(iframe.src);
-    });
+    iframe.src = window.top.sketchMeasureCompare.html;
+    document.body.appendChild(iframe);
+    document.body.appendChild(toggleBtnWrapper);
 };
