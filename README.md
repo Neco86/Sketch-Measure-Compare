@@ -11,7 +11,7 @@ const script = document.createElement('script');
 script.onload = () => {
     sketchMeasureCompare.init({zIndex: 10000});
 };
-script.src = "https://neco86.github.io/Sketch-Measure-Compare/inject.min.js";
+script.src = "https://neco86.github.io/Sketch-Measure-Compare/index.min.js";
 document.head.appendChild(script);
 ```
 
