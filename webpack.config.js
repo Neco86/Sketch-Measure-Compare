@@ -24,8 +24,16 @@ const config = {
         rules: [
             {
                 test: /\.(js|jsx)$/i,
-                loader: 'babel-loader',
-            }
+                use: ['babel-loader'],
+            },
+            {
+                test: /\.css$/i,
+                use: ['css-loader', 'uglifycss-loader'],
+            },
+            {
+                test: /\.html$/i,
+                use: ['html-loader'],
+            },
         ],
     },
 };
