@@ -2,11 +2,11 @@ import tpl from './tpl.html';
 
 const func = () => {
     const loadImg = (info) => {
-        const img = document.createElement('img');
-        img.src = info.url;
         return new Promise((resolve) => {
+            const img = document.createElement('img');
             img.onload = () => resolve({img, name: info.name});
             img.onerror = () => resolve(null);
+            img.src = info.url;
         });
     };
     const imgList = window.top.sketchMeasureCompare.tplImgList || [];
