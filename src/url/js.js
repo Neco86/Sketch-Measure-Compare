@@ -18,7 +18,7 @@ const func = () => {
         }
         if (!isIncludeIndex && imgList.length) {
             window.top.sketchMeasureCompare.tplImgList = imgList.map(img => ({
-                name: img.name,
+                name: img.name.replace(/\..+$/g,''),
                 url: `${URL.createObjectURL(img)}#`,
             }));
         }
