@@ -10,17 +10,24 @@ const func = () => {
         }
         fileList = Array.from(files);
         const isIncludeIndex = !!fileList.find((t) => t.name === 'index.html');
-        if (!isIncludeIndex) {
+        const imgList = fileList.filter((t) => /image/.test(t.type));
+        if (!isIncludeIndex && !imgList.length) {
             uploader.value = '';
-            alert('UI: index.html Not Found!');
+            alert('WRONG FOLDER!');
             return;
+        }
+        if (!isIncludeIndex && imgList.length) {
+            window.top.sketchMeasureCompare.tplImgList = imgList.map(img => ({
+                name: img.name,
+                url: `${URL.createObjectURL(img)}#`,
+            }));
         }
         fileList = fileList.map((file) => ({
             name: file.name,
             path: file.webkitRelativePath.replace(/^.*?\//, ''),
             url: URL.createObjectURL(file),
         }));
-        const index = fileList.find((t) => t.name === 'index.html');
+        const index = fileList.find((t) => t.name === 'index.html') || {url: window.top.sketchMeasureCompare.tpl};
         if (index) {
             fetch(index.url)
                 .then((res) => res.text())
@@ -57,6 +64,8 @@ const func = () => {
         fileList.forEach((file) => {
             URL.revokeObjectURL(file.url);
         });
+        (window.top.sketchMeasureCompare.tplImgList || []).forEach(t => URL.revokeObjectURL(t.url));
+        delete window.top.sketchMeasureCompare.tplImgList;
         fileList = [];
         iframe.src = '';
         uploader.value = '';
