@@ -4,6 +4,7 @@ import js from './url/js';
 import css from './url/css';
 import html from './url/html';
 import init from './init';
+import tpl from './url/tpl';
 
 class SketchMeasureCompare {
     constructor() {
@@ -15,6 +16,7 @@ SketchMeasureCompare.prototype.sketchMeasure = sketchMeasure;
 SketchMeasureCompare.prototype.js = js;
 SketchMeasureCompare.prototype.css = css;
 SketchMeasureCompare.prototype.html = html;
+SketchMeasureCompare.prototype.tpl = tpl;
 
 if (!window.top.sketchMeasureCompare) {
     const sketchMeasureCompare = new SketchMeasureCompare();
