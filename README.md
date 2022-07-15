@@ -12,7 +12,7 @@ script.onload = () => {
     sketchMeasureCompare.init({zIndex: 10000});
 };
 // script.src = "https://neco86.github.io/Sketch-Measure-Compare/index.min.js";
-script.src = "https://cdn.jsdelivr.net/gh/Neco86/Sketch-Measure-Compare@1.0.0/index.min.js";
+script.src = "https://cdn.jsdelivr.net/gh/Neco86/Sketch-Measure-Compare@1.1.0/index.min.js";
 document.head.appendChild(script);
 ```
 
