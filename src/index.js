@@ -1,10 +1,11 @@
 import rulers from './url/rulers';
 import sketchMeasure from './url/sketchMeasure';
-import js from './url/js';
-import css from './url/css';
-import html from './url/html';
+import index from './url/index';
+import css from './url/index.css';
+import html from './url/index.html';
+import tplIndex from './url/tpl';
+import tpl from './url/tpl.html';
 import init from './init';
-import tpl from './url/tpl';
 
 class SketchMeasureCompare {
     constructor() {
@@ -13,9 +14,10 @@ class SketchMeasureCompare {
 }
 SketchMeasureCompare.prototype.rulers = rulers;
 SketchMeasureCompare.prototype.sketchMeasure = sketchMeasure;
-SketchMeasureCompare.prototype.js = js;
+SketchMeasureCompare.prototype.index = index;
 SketchMeasureCompare.prototype.css = css;
 SketchMeasureCompare.prototype.html = html;
+SketchMeasureCompare.prototype.tplIndex = tplIndex;
 SketchMeasureCompare.prototype.tpl = tpl;
 
 if (!window.top.sketchMeasureCompare) {
