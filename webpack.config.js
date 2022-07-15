@@ -28,32 +28,23 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/i,
-                use: ['babel-loader'],
+                test: /\.js$/i,
+                use: [path.resolve('./url-webpack-loader'), 'babel-loader', 'terser-loader'],
             },
             {
                 test: /\.css$/i,
-                use: ['css-loader', 'uglifycss-loader'],
+                use: [
+                    path.resolve('./url-webpack-loader'),
+                    'css-loader',
+                    'uglifycss-loader',
+                ],
             },
             {
                 test: /\.html$/i,
-                use: ['html-loader'],
-            },
+                use: [path.resolve('./url-webpack-loader'), 'html-loader'],
+            }
         ],
-    },
-    optimization: {
-        minimize: true,
-        minimizer: [
-            new TerserPlugin({
-                terserOptions: {
-                    format: {
-                        comments: false,
-                    },
-                },
-                extractComments: false,
-            }),
-        ],
-    },
+    }
 };
 
 module.exports = () => {
