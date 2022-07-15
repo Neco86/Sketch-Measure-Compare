@@ -1,6 +1,4 @@
-import tpl from './tpl.html';
-
-const func = () => {
+export default () => {
     const loadImg = (info) => {
         return new Promise((resolve) => {
             const img = document.createElement('img');
@@ -31,11 +29,3 @@ const func = () => {
         });
     }
 };
-
-const funcUrl = URL.createObjectURL(
-    new Blob([`(${func})();`], { type: 'text/javascript' })
-);
-
-export default URL.createObjectURL(
-    new Blob([tpl.replace('$FUNC', funcUrl)], { type: 'text/html' })
-);

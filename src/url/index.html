@@ -14,6 +14,18 @@
         </div>
         <div id="clear">CLEAR UI</div>
         <iframe id="iframe"></iframe>
-        <script src="$FUNC"></script>
+        <script>
+            (() => {
+                "use strict"
+                const script = document.createElement('script');
+                script.src = window.top.sketchMeasureCompare.index;
+                document.body.appendChild(script);
+
+                const css = document.createElement('link');
+                css.rel = 'stylesheet';
+                css.href = window.top.sketchMeasureCompare.css;
+                document.head.appendChild(css);
+            })();
+        </script>
     </body>
 </html>

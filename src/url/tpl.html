@@ -13,6 +13,13 @@
         />
     </head>
     <body id="app">
-        <script src="$FUNC"></script>
+        <script>
+            (() => {
+                "use strict"
+                const script = document.createElement('script');
+                script.src = window.top.sketchMeasureCompare.tplIndex;
+                document.body.appendChild(script);
+            })();
+        </script>
     </body>
 </html>

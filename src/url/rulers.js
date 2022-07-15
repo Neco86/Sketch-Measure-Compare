@@ -1,4 +1,4 @@
-const func = () => {
+export default () => {
     init(document);
 
     function addMouseHoverEvent(doc) {
@@ -51,7 +51,3 @@ const func = () => {
         });
     }
 };
-
-export default URL.createObjectURL(
-    new Blob([`(${func})();`], { type: 'text/javascript' })
-);

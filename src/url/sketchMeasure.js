@@ -1,4 +1,4 @@
-const func = () =>
+export default () =>
     setTimeout(() => {
         const wrapper = document.getElementsByClassName(
             'screen-viewer-inner'
@@ -388,6 +388,3 @@ const func = () =>
         }
     }, 220);
 
-export default URL.createObjectURL(
-    new Blob([`(${func})();`], { type: 'text/javascript' })
-);
