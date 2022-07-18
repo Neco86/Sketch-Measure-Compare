@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV == 'production';
 
@@ -29,7 +29,7 @@ const config = {
         rules: [
             {
                 test: /\.js$/i,
-                use: [path.resolve('./url-webpack-loader'), 'babel-loader', 'terser-loader'],
+                use: [path.resolve('./url-webpack-loader'), 'babel-loader'],
             },
             {
                 test: /\.css$/i,
@@ -42,7 +42,14 @@ const config = {
             {
                 test: /\.html$/i,
                 use: [path.resolve('./url-webpack-loader'), 'html-loader'],
-            }
+            },
+        ],
+    },
+    optimization: {
+        minimizer: [
+            new TerserWebpackPlugin({
+                extractComments: false,
+            }),
         ],
     }
 };
