@@ -19,7 +19,7 @@ jobs:
           folder: dist
 
       - name: Publish
-        uses: primer/publish@v3
+        uses: primer/publish@3.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
