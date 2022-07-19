@@ -29,3 +29,5 @@ if (!window.top.sketchMeasureCompare) {
         sketchMeasureCompare.init({ zIndex: 10000 });
     }
 }
+
+export default window.top.sketchMeasureCompare;
