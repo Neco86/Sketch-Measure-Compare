@@ -16,13 +16,13 @@ jobs:
       - name: Build
         run: npm run build
         
-      - name: Pre-Publish
-        run: echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc && cat .npmrc
+      - name: PRE-Publish
+        run: echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish
-        run: npm publish
+        run: npm publish --access public
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
