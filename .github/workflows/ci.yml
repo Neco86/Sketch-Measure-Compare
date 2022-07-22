@@ -16,11 +16,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Publish
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
