@@ -17,7 +17,7 @@ jobs:
         run: npm run build
         
       - name: Copy
-        run: ./.github/workflows/publish.yml ./dist/.github/workflows/publish.yml
+        run: cp ./.github/workflows/publish.yml ./dist/.github/workflows/publish.yml
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
