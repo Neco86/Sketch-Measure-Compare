@@ -17,7 +17,7 @@ jobs:
         run: npm run build
         
       - name: Copy
-        run: cp -r src dist && ls -l
+        run: cp -r .github dist && ls -l dist
         
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
