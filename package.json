@@ -20,7 +20,7 @@
   },
   "description": "Sketch Measure Compare",
   "scripts": {
-    "build": "webpack --mode=production --node-env=production",
+    "build": "webpack --mode=production --node-env=production && cp -r ./.github ./dist",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
