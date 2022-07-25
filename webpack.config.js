@@ -26,9 +26,8 @@ const config = {
         }),
         new CopyPlugin({
             patterns: [
-                { from: 'README.md', to: 'README.md' },
-                { from: 'package.json', to: 'package.json' },
-                { from: '.github', to: '.github' },
+                'README.md',
+                'package.json'
             ],
         })
     ],
