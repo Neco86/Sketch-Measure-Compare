@@ -11,10 +11,18 @@ const script = document.createElement('script');
 script.onload = () => {
     sketchMeasureCompare.init({zIndex: 10000});
 };
-// script.src = "https://neco86.github.io/Sketch-Measure-Compare/index.min.js";
 script.src = "https://cdn.jsdelivr.net/gh/Neco86/Sketch-Measure-Compare@latest/index.min.js";
 document.head.appendChild(script);
 ```
+
+Available CDN:
+
+- https://unpkg.com/sketch-measure-compare@latest/index.min.js
+- https://cdn.jsdelivr.net/gh/Neco86/Sketch-Measure-Compare@latest/index.min.js
+
+Backup:
+
+- https://neco86.github.io/Sketch-Measure-Compare/index.min.js
 
 ### Step2: Click the UI button to switch the current page to the file selection page
 
