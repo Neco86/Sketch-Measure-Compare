@@ -12,14 +12,9 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run build
-
-      - name: Pre Publish
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16.x'
+        run: npm run build && cd dist
 
       - name: Publish
-        run: cd dist && npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
