@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV == 'production';
 
@@ -22,6 +23,13 @@ const config = {
     plugins: [
         new HtmlWebpackPlugin({
             template: 'index.html',
+        }),
+        new CopyPlugin({
+            patterns: [
+                { from: 'README.md', to: 'README.md' },
+                { from: 'package.json', to: 'package.json' },
+                { from: '.github', to: '.github' },
+            ],
         })
     ],
     module: {
