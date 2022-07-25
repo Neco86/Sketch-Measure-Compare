@@ -15,8 +15,18 @@ jobs:
 
       - name: Build
         run: npm run build
-        
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist
+
+      - name: Pre Publish
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+
+      - name: Publish
+        run: cd dist && npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
