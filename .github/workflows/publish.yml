@@ -12,9 +12,10 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run build && cd dist
+        run: npm run build
 
       - name: Publish
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
+          package: ./dist/package.json
