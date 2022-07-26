@@ -58,7 +58,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           github_repo: ${{ github.repository }}
           version: ${{ env.PACKAGE_VERSION }}
-      #     git_commit_sha: ${{ github.sha }}
+          git_commit_sha: ${{ github.head_ref }}
 
       # - name: Create Release
       #   id: create_release
