@@ -52,13 +52,16 @@ jobs:
       - name: package-version
         run: node -p -e '`PACKAGE_VERSION=v${require("./package.json").version}`' >> $GITHUB_ENV
 
+      - name: sha
+        run: SHA=git rev-parse HEAD >> $GITHUB_ENV
+
       - name: Create tag
         uses: pkgdeps/git-tag-action@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           github_repo: ${{ github.repository }}
           version: ${{ env.PACKAGE_VERSION }}
-          git_commit_sha: ${{ github.head_ref }}
+          git_commit_sha: ${{ env.SHA }}
 
       # - name: Create Release
       #   id: create_release
