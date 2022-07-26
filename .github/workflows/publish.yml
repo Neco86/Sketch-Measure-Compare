@@ -47,17 +47,17 @@ jobs:
           ref: gh-pages
 
       - name: 'ls'
-        run: 'ls -l'
+        run: 'ls -l && cat ./package.json | grep version'
 
       - name: package-version
         run: node -p -e '`PACKAGE_VERSION=v${require("./package.json").version}`' >> $GITHUB_ENV
 
-      # - name: Create tag
-      #   uses: pkgdeps/git-tag-action@v2
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     github_repo: ${{ github.repository }}
-      #     version: ${{ env.PACKAGE_VERSION }}
+      - name: Create tag
+        uses: pkgdeps/git-tag-action@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_repo: ${{ github.repository }}
+          version: ${{ env.PACKAGE_VERSION }}
       #     git_commit_sha: ${{ github.sha }}
 
       # - name: Create Release
