@@ -5,41 +5,41 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      # - name: 'Checkout'
-      #   uses: 'actions/checkout@v2'
-      #   with:
-      #     ref: ${{ github.ref }}
+      - name: 'Checkout'
+        uses: 'actions/checkout@v2'
+        with:
+          ref: ${{ github.ref }}
 
-      # - name: 'Current Version'
-      #   run: cat ./package.json | grep version
+      - name: 'Current Version'
+        run: cat ./package.json | grep version
 
-      # - name: 'Automated Version Bump'
-      #   id: version-bump
-      #   uses: 'phips28/gh-action-bump-version@master'
-      #   with:
-      #     skip-tag: 'true'
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 'Automated Version Bump'
+        id: version-bump
+        uses: 'phips28/gh-action-bump-version@master'
+        with:
+          skip-tag: 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: 'New Version'
-      #   run: cat ./package.json | grep version
+      - name: 'New Version'
+        run: cat ./package.json | grep version
 
-      # - name: Install
-      #   run: npm install
+      - name: Install
+        run: npm install
 
-      # - name: Build
-      #   run: npm run build
+      - name: Build
+        run: npm run build
 
-      # - name: Publish
-      #   uses: JS-DevTools/npm-publish@v1
-      #   with:
-      #     token: ${{ secrets.NPM_TOKEN }}
-      #     package: ./dist/package.json
+      - name: Publish
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: ./dist/package.json
 
-      # - name: Deploy
-      #   uses: JamesIves/github-pages-deploy-action@v4
-      #   with:
-      #     folder: dist
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
 
       - name: 'Checkout gh'
         uses: 'actions/checkout@v2'
@@ -63,13 +63,13 @@ jobs:
           version: ${{ env.PACKAGE_VERSION }}
           git_commit_sha: ${{ env.SHA }}
 
-      # - name: Create Release
-      #   id: create_release
-      #   uses: actions/create-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     tag_name: ${{ env.PACKAGE_VERSION }}
-      #     release_name: ${{ env.PACKAGE_VERSION }}
-      #     draft: false
-      #     prerelease: false
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.PACKAGE_VERSION }}
+          release_name: ${{ env.PACKAGE_VERSION }}
+          draft: false
+          prerelease: false
