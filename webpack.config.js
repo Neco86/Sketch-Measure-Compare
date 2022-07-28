@@ -1,9 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
-const CopyPlugin = require("copy-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 
-const isProduction = process.env.NODE_ENV == 'production';
+const isProduction = process.env.NODE_ENV === 'production';
 
 const config = {
     entry: {
@@ -12,25 +12,25 @@ const config = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'index.min.js',
-        library: "sketchMeasureCompare",
+        library: 'sketchMeasureCompare',
         libraryTarget: 'umd',
-        libraryExport: "default"
+        libraryExport: 'default',
     },
     devServer: {
         open: true,
         host: 'localhost',
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: 'index.html',
-        }),
-        new CopyPlugin({
-            patterns: [
-                'README.md',
-                'package.json'
-            ],
-        })
-    ],
+    plugins: isProduction
+        ? [
+              new CopyPlugin({
+                  patterns: ['README.md', 'package.json'],
+              }),
+          ]
+        : [
+              new HtmlWebpackPlugin({
+                  template: 'index.html',
+              }),
+          ],
     module: {
         rules: [
             {
@@ -57,7 +57,7 @@ const config = {
                 extractComments: false,
             }),
         ],
-    }
+    },
 };
 
 module.exports = () => {
