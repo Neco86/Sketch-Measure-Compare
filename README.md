@@ -5,7 +5,21 @@ A tool for easy comparison of UI and web pages
 ## Guide
 
 ### Step1: Installation
+#### Method 1: Using npm
+```shell
+npm install sketch-measure-compare
+```
 
+```js
+import sketchMeasureCompare from 'sketch-measure-compare';
+sketchMeasureCompare.init();
+// or init with options
+sketchMeasureCompare.init({
+  zIndex: 10000,
+});
+```
+
+#### Method 2: Using CDN in HTML
 ```js
 const script = document.createElement('script');
 script.onload = () => {
