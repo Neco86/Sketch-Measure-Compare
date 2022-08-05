@@ -38,7 +38,7 @@ Backup:
 
 - https://neco86.github.io/Sketch-Measure-Compare/index.min.js
 
-### Step2: Click the UI button to switch the current page to the file selection page
+### Step2: Click the UI button to switch page
 
 ### Step3: Choose files
 
