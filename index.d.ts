@@ -1,5 +1,6 @@
 interface Config {
     zIndex?: number;
+    enableDomRulers?: Boolean;
 }
 
 interface SketchMeasureCompare {
