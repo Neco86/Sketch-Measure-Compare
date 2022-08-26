@@ -1,4 +1,8 @@
-export default ({ zIndex = 10000 } = {}) => {
+export default ({ zIndex = 10000, enableDomRulers = false} = {}) => {
+    if (!enableDomRulers) {
+        URL.revokeObjectURL(window.top.sketchMeasureCompare.rulers);
+        delete window.top.sketchMeasureCompare.rulers;
+    }
     const iframe = document.createElement('iframe');
     const setStyle = (ele, obj) => {
         Object.keys(obj).forEach((key) => {

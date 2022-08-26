@@ -26,7 +26,7 @@ if (!window.top.sketchMeasureCompare) {
 
     if (process.env.NODE_ENV === 'development') {
         console.log(sketchMeasureCompare);
-        sketchMeasureCompare.init({ zIndex: 10000 });
+        sketchMeasureCompare.init({ zIndex: 10000, enableDomRulers: true });
     }
 }
 
