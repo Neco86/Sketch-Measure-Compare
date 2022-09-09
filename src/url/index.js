@@ -22,9 +22,10 @@ export default () => {
                 url: `${URL.createObjectURL(img)}#`,
             }));
         }
+        const pathPrefix = fileList.find((t) => t.name === 'index.html')?.webkitRelativePath?.replace?.('index.html', '') ?? '';
         fileList = fileList.map((file) => ({
             name: file.name,
-            path: file.webkitRelativePath.replace(/^.*?\//, ''),
+            path: file.webkitRelativePath.replace(new RegExp(`^${pathPrefix}`), ''),
             url: URL.createObjectURL(file),
         }));
         const index = fileList.find((t) => t.name === 'index.html') || {url: window.top.sketchMeasureCompare.tpl};
