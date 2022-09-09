@@ -23,9 +23,10 @@ export default () => {
             }));
         }
         const pathPrefix = fileList.find((t) => t.name === 'index.html')?.webkitRelativePath?.replace?.('index.html', '') ?? '';
+        const pathRegExp = new RegExp(`^${pathPrefix}`);
         fileList = fileList.map((file) => ({
             name: file.name,
-            path: file.webkitRelativePath.replace(new RegExp(`^${pathPrefix}`), ''),
+            path: file.webkitRelativePath.replace(pathRegExp, ''),
             url: URL.createObjectURL(file),
         }));
         const index = fileList.find((t) => t.name === 'index.html') || {url: window.top.sketchMeasureCompare.tpl};
