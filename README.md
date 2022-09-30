@@ -24,7 +24,10 @@ sketchMeasureCompare.init({
 ```js
 const script = document.createElement('script');
 script.onload = () => {
-    sketchMeasureCompare.init({zIndex: 10000});
+    sketchMeasureCompare.init({
+      zIndex: 10000,
+      enableDomRulers: false
+    });
 };
 script.src = "https://unpkg.com/sketch-measure-compare@latest/index.min.js";
 document.head.appendChild(script);
