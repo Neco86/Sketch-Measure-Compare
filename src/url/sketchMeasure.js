@@ -1,5 +1,9 @@
-export default () =>
-    setTimeout(() => {
+export default () => {
+    let isInit = false;
+    const init = () => {
+        if (isInit) {
+            return;
+        }
         const wrapper = document.getElementsByClassName(
             'screen-viewer-inner'
         )?.[0];
@@ -7,6 +11,7 @@ export default () =>
         const rulers = document.getElementById('rulers');
         const flowMode = document.getElementById('flow-mode');
         if (wrapper && screen && rulers && flowMode) {
+            isInit = true;
             const setStyle = (ele, obj) => {
                 Object.keys(obj).forEach((key) => {
                     ele.style[key] = obj[key];
@@ -386,5 +391,11 @@ export default () =>
                 subtree: true,
             });
         }
-    }, 220);
+    }
+    setTimeout(init, 220);
+    setTimeout(init, 500);
+    setTimeout(init, 1000);
+    setTimeout(init, 3000);
+    setTimeout(init, 5000);
+}
 
