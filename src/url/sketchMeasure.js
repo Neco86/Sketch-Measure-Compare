@@ -10,7 +10,8 @@ export default () => {
         const screen = document.getElementById('screen');
         const rulers = document.getElementById('rulers');
         const flowMode = document.getElementById('flow-mode');
-        if (wrapper && screen && rulers && flowMode) {
+        const header = document.getElementsByClassName('header-center')?.[0];
+        if (wrapper && screen && rulers && flowMode && header) {
             isInit = true;
             const setStyle = (ele, obj) => {
                 Object.keys(obj).forEach((key) => {
@@ -18,9 +19,38 @@ export default () => {
                 });
             };
 
+            const clearWrapper = document.createElement('div');
+            const clear = document.createElement('div');
+            clear.innerHTML = 'CLEAR UI';
+            setStyle(clearWrapper, {
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '0 25px 0 10px',
+                cursor: 'pointer',
+                whiteSpace: 'nowrap',
+            });
+            setStyle(clear, {
+                padding: '5px',
+                border: '1px solid',
+            });
+            clearWrapper.appendChild(clear);
+            header.appendChild(clearWrapper);
+            clearWrapper.onclick = () =>
+                window.parent.postMessage(
+                    {
+                        msg: 'CLEAR UI',
+                    },
+                    '*'
+                );
+
             const style = document.createElement('style');
             style.innerHTML = '.layer{z-index: 1;}';
             document.head.appendChild(style);
+
+            window.top.onbeforeunload = function () {
+                return false;
+            }
 
             const iframe = document.createElement('iframe');
             setStyle(iframe, {
@@ -31,7 +61,10 @@ export default () => {
             iframe.height = '100%';
             iframe.src = window.top.location.href;
             iframe.onload = () => {
-                if (iframe.contentDocument && window.top.sketchMeasureCompare.config.enableDomRulers) {
+                if (
+                    iframe.contentDocument &&
+                    window.top.sketchMeasureCompare.config.enableDomRulers
+                ) {
                     const script = document.createElement('script');
                     script.src = window.top.sketchMeasureCompare.rulers;
                     iframe.contentDocument.head.appendChild(script);
@@ -391,11 +424,10 @@ export default () => {
                 subtree: true,
             });
         }
-    }
+    };
     setTimeout(init, 220);
     setTimeout(init, 500);
     setTimeout(init, 1000);
     setTimeout(init, 3000);
     setTimeout(init, 5000);
-}
-
+};

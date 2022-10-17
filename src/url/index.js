@@ -2,7 +2,6 @@ export default () => {
     const uploader = document.getElementById('uploader');
     const iframe = document.getElementById('iframe');
     const placeholder = document.getElementById('placeholder');
-    const clear = document.getElementById('clear');
     let fileList = [];
     uploader.onchange = ({ target: { files } }) => {
         if (!files.length) {
@@ -57,7 +56,6 @@ export default () => {
                     iframe.src = url;
                     placeholder.style.display = 'none';
                     iframe.style.display = 'block';
-                    clear.style.display = 'block';
                 });
         }
     };
@@ -73,8 +71,15 @@ export default () => {
         uploader.value = '';
         placeholder.style.display = 'block';
         iframe.style.display = 'none';
-        clear.style.display = 'none';
     };
     document.addEventListener('beforeunload', handleClear);
-    clear.onclick = handleClear;
+    window.addEventListener('message', ({ data }) => {
+        if (!data || !data.msg) {
+            return;
+        }
+        const { msg } = data;
+        if (msg === 'CLEAR UI') {
+            handleClear();
+        }
+    });
 };
