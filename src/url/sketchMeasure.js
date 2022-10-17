@@ -31,7 +31,7 @@ export default () => {
             iframe.height = '100%';
             iframe.src = window.top.location.href;
             iframe.onload = () => {
-                if (iframe.contentDocument && window.top.sketchMeasureCompare.rulers) {
+                if (iframe.contentDocument && window.top.sketchMeasureCompare.config.enableDomRulers) {
                     const script = document.createElement('script');
                     script.src = window.top.sketchMeasureCompare.rulers;
                     iframe.contentDocument.head.appendChild(script);
