@@ -1,8 +1,16 @@
-export default ({ zIndex = 10000, enableDomRulers = false} = {}) => {
-    if (!enableDomRulers) {
-        URL.revokeObjectURL(window.top.sketchMeasureCompare.rulers);
-        delete delete window.top.sketchMeasureCompare.__proto__.rulers;
+let isInit = false;
+
+export default (config) => {
+    if (isInit) {
+        return;
     }
+    isInit = true;
+    const zIndex  = config?.zIndex ?? 10000;
+    const enableDomRulers = config?.enableDomRulers ?? false;
+    window.top.sketchMeasureCompare.config = {
+        zIndex,
+        enableDomRulers
+    };
     const iframe = document.createElement('iframe');
     const setStyle = (ele, obj) => {
         Object.keys(obj).forEach((key) => {
