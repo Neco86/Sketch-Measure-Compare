@@ -27,22 +27,22 @@ export default () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 padding: '0 25px 0 10px',
-                cursor: 'pointer',
                 whiteSpace: 'nowrap',
             });
             setStyle(clear, {
                 padding: '5px',
                 border: '1px solid',
+                cursor: 'pointer',
             });
-            clearWrapper.appendChild(clear);
-            header.appendChild(clearWrapper);
-            clearWrapper.onclick = () =>
+            clear.onclick = () =>
                 window.parent.postMessage(
                     {
                         msg: 'CLEAR UI',
                     },
                     '*'
                 );
+            clearWrapper.appendChild(clear);
+            header.appendChild(clearWrapper);
 
             const style = document.createElement('style');
             style.innerHTML = '.layer{z-index: 1;}';
