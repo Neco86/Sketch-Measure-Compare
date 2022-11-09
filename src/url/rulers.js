@@ -2,30 +2,48 @@ export default () => {
     init(document);
 
     function addMouseHoverEvent(doc) {
-        doc.querySelectorAll('*').forEach((node) => {
-            if (node.isInitSketchMeasureRulersNode) {
-                return;
-            }
-            node.isInitSketchMeasureRulersNode = true;
-            node.addEventListener('mouseenter', () => {
-                window.parent.postMessage(
-                    {
-                        msg: 'updateRulers',
-                        payload: node.getBoundingClientRect(),
-                    },
-                    '*'
-                );
+        Array.from(doc.querySelectorAll('*'))
+            .filter(
+                (t) =>
+                    ![
+                        'SCRIPT',
+                        'STYLE',
+                        'TITLE',
+                        'HTML',
+                        'HEAD',
+                        'META',
+                        'BODY',
+                        'NOSCRIPT',
+                    ].includes(t.nodeName)
+            )
+            .forEach((node) => {
+                if (node.isInitSketchMeasureRulersNode) {
+                    return;
+                }
+                node.isInitSketchMeasureRulersNode = true;
+                node.addEventListener('mouseenter', () => {
+                    if (window.top.sketchMeasureCompare.config.enableDomRulers) {
+                        window.parent.postMessage(
+                            {
+                                msg: 'updateRulers',
+                                payload: node.getBoundingClientRect(),
+                            },
+                            '*'
+                        );
+                    }
+                });
+                node.addEventListener('mouseleave', () => {
+                    if (window.top.sketchMeasureCompare.config.enableDomRulers) {
+                        window.parent.postMessage(
+                            {
+                                msg: 'updateRulers',
+                                payload: { width: 0, height: 0, top: 0, left: 0 },
+                            },
+                            '*'
+                        );
+                    }
+                });
             });
-            node.addEventListener('mouseleave', () => {
-                window.parent.postMessage(
-                    {
-                        msg: 'updateRulers',
-                        payload: { width: 0, height: 0, top: 0, left: 0 },
-                    },
-                    '*'
-                );
-            });
-        });
     }
 
     function init(doc) {

@@ -48,9 +48,7 @@ export default () => {
             style.innerHTML = '.layer{z-index: 1;}';
             document.head.appendChild(style);
 
-            window.top.onbeforeunload = function () {
-                return false;
-            };
+            window.top.onbeforeunload = () => false;
 
             const iframe = document.createElement('iframe');
             setStyle(iframe, {
@@ -62,6 +60,7 @@ export default () => {
             iframe.src = window.top.location.href;
             iframe.onload = () => {
                 if (iframe.contentDocument) {
+                    iframe.contentWindow.onbeforeunload = () => false;
                     if (
                         window.top.sketchMeasureCompare.config.enableDomRulers
                     ) {
@@ -89,10 +88,16 @@ export default () => {
             iframeSrc.placeholder = 'url';
             iframeSrc.value = iframe.src;
             iframeSrc.oninput = (e) => {
+                if (iframe.contentDocument) {
+                    iframe.contentWindow.onbeforeunload = () => {};
+                }
                 iframe.src = e.target.value;
             };
             iframeSrc.onkeyup = (e) => {
                 if (e.key === 'Enter') {
+                    if (iframe.contentDocument) {
+                        iframe.contentWindow.onbeforeunload = () => {};
+                    }
                     iframe.src = '';
                     iframe.src = e.target.value;
                 }

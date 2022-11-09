@@ -2,28 +2,44 @@ export default () => {
     init(document);
 
     function addRightClickEvent(doc) {
-        Array.from(doc.querySelectorAll('*')).filter(
-            (t) =>
-                !['SCRIPT', 'STYLE', 'TITLE'].includes(t.nodeName) &&
-                t.childNodes.length === 1 &&
-                t.childNodes[0].nodeName === '#text'
-        ).forEach(textNode => {
-            if (textNode.isInitSketchMeasureTextPlaceNode) {
-                return;
-            }
-            textNode.isInitSketchMeasureTextPlaceNode = true;
-            textNode.addEventListener('contextmenu', e => {
-                e.preventDefault();
-            });
-            textNode.addEventListener('mousedown', e => {
-                if(e.button === 2){
-                    const content = window.parent['content'];
-                    if (content) {
-                        e.target.innerHTML = content.innerHTML.replace(/\s/g, '');
-                    }
+        Array.from(doc.querySelectorAll('*'))
+            .filter(
+                (t) =>
+                    ![
+                        'SCRIPT',
+                        'STYLE',
+                        'TITLE',
+                        'HTML',
+                        'HEAD',
+                        'META',
+                        'BODY',
+                        'NOSCRIPT',
+                    ].includes(t.nodeName) &&
+                    t.childNodes.length === 1 &&
+                    t.childNodes[0].nodeName === '#text'
+            )
+            .forEach((textNode) => {
+                if (textNode.isInitSketchMeasureTextPlaceNode) {
+                    return;
                 }
+                textNode.isInitSketchMeasureTextPlaceNode = true;
+                textNode.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                });
+                textNode.addEventListener('mousedown', (e) => {
+                    const content = window?.parent?.['content'];
+                    if (
+                        e.button === 2 &&
+                        content &&
+                        window.top.sketchMeasureCompare.config.enableTextReplace
+                    ) {
+                        e.target.innerHTML = content.innerHTML.replace(
+                            /\s/g,
+                            ''
+                        );
+                    }
+                });
             });
-        });
     }
 
     function init(doc) {
