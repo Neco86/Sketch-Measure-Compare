@@ -19,6 +19,8 @@ export default () => {
                 });
             };
 
+            const iframe = document.createElement('iframe');
+
             const clearWrapper = document.createElement('div');
             const clear = document.createElement('div');
             clear.innerHTML = 'CLEAR UI';
@@ -34,13 +36,17 @@ export default () => {
                 border: '1px solid',
                 cursor: 'pointer',
             });
-            clear.onclick = () =>
+            clear.onclick = () => {
+                if (iframe.contentDocument) {
+                    iframe.contentWindow.onbeforeunload = () => {};
+                }
                 window.parent.postMessage(
                     {
                         msg: 'CLEAR UI',
                     },
                     '*'
                 );
+            };
             clearWrapper.appendChild(clear);
             header.appendChild(clearWrapper);
 
@@ -50,7 +56,6 @@ export default () => {
 
             window.top.onbeforeunload = () => false;
 
-            const iframe = document.createElement('iframe');
             setStyle(iframe, {
                 border: 'none',
                 position: 'absolute',
@@ -186,6 +191,9 @@ export default () => {
                 const { width, height, marginTop } = screen.style;
 
                 if (width !== newScreen.style.width) {
+                    if (iframe.contentDocument) {
+                        iframe.contentWindow.onbeforeunload = () => {};
+                    }
                     iframe.src = '';
                     iframe.src = iframeSrc.value;
                 }
