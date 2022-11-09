@@ -7,9 +7,11 @@ export default (config) => {
     isInit = true;
     const zIndex  = config?.zIndex ?? 10000;
     const enableDomRulers = config?.enableDomRulers ?? false;
+    const enableTextReplace = config?.enableTextReplace ?? false;
     window.top.sketchMeasureCompare.config = {
         zIndex,
-        enableDomRulers
+        enableDomRulers,
+        enableTextReplace
     };
     const iframe = document.createElement('iframe');
     const setStyle = (ele, obj) => {

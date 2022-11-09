@@ -5,6 +5,7 @@ import css from './url/index.css';
 import html from './url/index.html';
 import tplIndex from './url/tpl';
 import tpl from './url/tpl.html';
+import textReplace from './url/textReplace';
 import init from './init';
 
 class SketchMeasureCompare {
@@ -19,6 +20,7 @@ SketchMeasureCompare.prototype.css = css;
 SketchMeasureCompare.prototype.html = html;
 SketchMeasureCompare.prototype.tplIndex = tplIndex;
 SketchMeasureCompare.prototype.tpl = tpl;
+SketchMeasureCompare.prototype.textReplace = textReplace;
 
 if (!window.top.sketchMeasureCompare) {
     const sketchMeasureCompare = new SketchMeasureCompare();
@@ -26,7 +28,11 @@ if (!window.top.sketchMeasureCompare) {
 
     if (process.env.NODE_ENV === 'development') {
         console.log(sketchMeasureCompare);
-        sketchMeasureCompare.init({ zIndex: 10000, enableDomRulers: true });
+        sketchMeasureCompare.init({
+            zIndex: 10000,
+            enableDomRulers: true,
+            enableTextReplace: true,
+        });
     }
 }
 
