@@ -16,17 +16,19 @@ sketchMeasureCompare.init();
 // or init with options
 sketchMeasureCompare.init({
   zIndex: 10000,
-  enableDomRulers: false
+  enableDomRulers: false,
+  enableTextReplace: false
 });
 ```
 
-#### Method 2: Using CDN in HTML
+#### Method 2: Using CDN in HTML (Recommend)
 ```js
 const script = document.createElement('script');
 script.onload = () => {
     sketchMeasureCompare.init({
       zIndex: 10000,
-      enableDomRulers: false
+      enableDomRulers: false,
+      enableTextReplace: false
     });
 };
 script.src = "https://unpkg.com/sketch-measure-compare@latest/index.min.js";
