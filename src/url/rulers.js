@@ -3,10 +3,10 @@ export default () => {
 
     function addMouseHoverEvent(doc) {
         doc.querySelectorAll('*').forEach((node) => {
-            if (node.isInitSketchMeasureNode) {
+            if (node.isInitSketchMeasureRulersNode) {
                 return;
             }
-            node.isInitSketchMeasureNode = true;
+            node.isInitSketchMeasureRulersNode = true;
             node.addEventListener('mouseenter', () => {
                 window.parent.postMessage(
                     {
@@ -29,10 +29,10 @@ export default () => {
     }
 
     function init(doc) {
-        if (doc.isInitSketchMeasureDoc) {
+        if (doc.isInitSketchMeasureRulersDoc) {
             return;
         }
-        doc.isInitSketchMeasureDoc = true;
+        doc.isInitSketchMeasureRulersDoc = true;
         const handleDocumentChange = () => {
             addMouseHoverEvent(doc);
             const iframeList = document.querySelectorAll('iframe');

@@ -50,7 +50,7 @@ export default () => {
 
             window.top.onbeforeunload = function () {
                 return false;
-            }
+            };
 
             const iframe = document.createElement('iframe');
             setStyle(iframe, {
@@ -61,13 +61,22 @@ export default () => {
             iframe.height = '100%';
             iframe.src = window.top.location.href;
             iframe.onload = () => {
-                if (
-                    iframe.contentDocument &&
-                    window.top.sketchMeasureCompare.config.enableDomRulers
-                ) {
-                    const script = document.createElement('script');
-                    script.src = window.top.sketchMeasureCompare.rulers;
-                    iframe.contentDocument.head.appendChild(script);
+                if (iframe.contentDocument) {
+                    if (
+                        window.top.sketchMeasureCompare.config.enableDomRulers
+                    ) {
+                        const script = document.createElement('script');
+                        script.src = window.top.sketchMeasureCompare.rulers;
+                        iframe.contentDocument.head.appendChild(script);
+                    }
+                    if (
+                        window.top.sketchMeasureCompare.config.enableTextReplace
+                    ) {
+                        const script = document.createElement('script');
+                        script.src =
+                            window.top.sketchMeasureCompare.textReplace;
+                        iframe.contentDocument.head.appendChild(script);
+                    }
                 }
             };
 
