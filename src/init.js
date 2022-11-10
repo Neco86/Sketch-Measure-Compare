@@ -8,10 +8,12 @@ export default (config) => {
     const zIndex  = config?.zIndex ?? 10000;
     const enableDomRulers = config?.enableDomRulers ?? false;
     const enableTextReplace = config?.enableTextReplace ?? false;
+    const offsetY = config?.offsetY ?? 0;
     window.top.sketchMeasureCompare.config = {
         zIndex,
         enableDomRulers,
-        enableTextReplace
+        enableTextReplace,
+        offsetY
     };
     const iframe = document.createElement('iframe');
     const setStyle = (ele, obj) => {

@@ -32,6 +32,7 @@ if (!window.top.sketchMeasureCompare) {
             zIndex: 10000,
             enableDomRulers: true,
             enableTextReplace: true,
+            offsetY: 100,
         });
     }
 }
