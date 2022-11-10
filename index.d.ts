@@ -2,6 +2,7 @@ interface Config {
     zIndex?: number;
     enableDomRulers?: Boolean;
     enableTextReplace?: Boolean;
+    offsetY?: number;
 }
 
 interface SketchMeasureCompare {

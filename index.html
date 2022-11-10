@@ -7,6 +7,15 @@
         <title>Sketch Measure Compare</title>
     </head>
     <body>
+        <div id="root">Test Page</div>
+        <br>
         <div>Test Page</div>
+        <br>
+        <span>Test Page</span>
+        <script>
+            window['root'].onclick = () => {
+                console.log('click');
+            }
+        </script>
     </body>
 </html>
