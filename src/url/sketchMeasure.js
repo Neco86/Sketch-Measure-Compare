@@ -60,7 +60,8 @@ export default () => {
             const setOffsetY = () => {
                 offsetY = window.top.sketchMeasureCompare.config.offsetY;
                 setStyle(iframe, {
-                    top: `${offsetY}px`
+                    top: `${offsetY}px`,
+                    height: `calc(100% - ${offsetY}px)`
                 });
             }
             setOffsetY();
@@ -69,7 +70,7 @@ export default () => {
                 position: 'absolute',
             });
             iframe.width = '100%';
-            iframe.height = `100% - ${offsetY}px`;
+            iframe.height = '100%';
             iframe.src = window.top.location.href;
             iframe.onload = () => {
                 setOffsetY();
