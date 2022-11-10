@@ -23,6 +23,7 @@ export default () => {
                     return;
                 }
                 textNode.isInitSketchMeasureTextPlaceNode = true;
+                textNode.contentEditable = true;
                 textNode.addEventListener('contextmenu', (e) => {
                     e.preventDefault();
                 });
@@ -33,12 +34,18 @@ export default () => {
                         content &&
                         window.top.sketchMeasureCompare.config.enableTextReplace
                     ) {
+                        e.preventDefault();
                         e.target.innerHTML = content.innerHTML.replace(
                             /\s/g,
                             ''
                         );
                     }
                 });
+                textNode.onclick = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                };
             });
     }
 
