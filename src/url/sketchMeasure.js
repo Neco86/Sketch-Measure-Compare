@@ -56,14 +56,23 @@ export default () => {
 
             window.top.onbeforeunload = () => false;
 
+            let offsetY = 0;
+            const setOffsetY = () => {
+                offsetY = window.top.sketchMeasureCompare.config.offsetY;
+                setStyle(iframe, {
+                    top: `${offsetY}px`
+                });
+            }
+            setOffsetY();
             setStyle(iframe, {
                 border: 'none',
                 position: 'absolute',
             });
             iframe.width = '100%';
-            iframe.height = '100%';
+            iframe.height = `100% - ${offsetY}px`;
             iframe.src = window.top.location.href;
             iframe.onload = () => {
+                setOffsetY();
                 if (iframe.contentDocument) {
                     iframe.contentWindow.onbeforeunload = () => false;
                     if (
@@ -288,7 +297,7 @@ export default () => {
                         width: `${payload.width}px`,
                     });
                     setStyle(rulers.childNodes[1], {
-                        top: `${payload.top}px`,
+                        top: `${payload.top + offsetY}px`,
                         height: `${payload.height}px`,
                     });
 
@@ -301,7 +310,7 @@ export default () => {
                     });
                     // top
                     setStyle(newRulers.childNodes[1], {
-                        top: `${payload.top}px`,
+                        top: `${payload.top + offsetY}px`,
                     });
                     // right
                     setStyle(newRulers.childNodes[2], {
@@ -309,7 +318,7 @@ export default () => {
                     });
                     // bottom
                     setStyle(newRulers.childNodes[3], {
-                        top: `${payload.top + payload.height}px`,
+                        top: `${payload.top + payload.height + offsetY}px`,
                     });
 
                     const isSelected = selectedRulers.style.display !== 'none';
@@ -328,9 +337,9 @@ export default () => {
                         );
 
                         const hoverLeft = payload.left;
-                        const hoverTop = payload.top;
+                        const hoverTop = payload.top + offsetY;
                         const hoverRight = payload.left + payload.width;
-                        const hoverBottom = payload.top + payload.height;
+                        const hoverBottom = payload.top + payload.height + offsetY;
 
                         const isShow =
                             hoverLeft || hoverTop || hoverRight || hoverBottom;
