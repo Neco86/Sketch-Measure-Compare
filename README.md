@@ -15,10 +15,10 @@ import sketchMeasureCompare from 'sketch-measure-compare';
 sketchMeasureCompare.init();
 // or init with options
 sketchMeasureCompare.init({
-  zIndex: 10000,
-  enableDomRulers: false,
-  enableTextReplace: false,
-  offsetY: 0
+    zIndex: 10000,
+    enableDomRulers: false,
+    enableTextReplace: false,
+    offsetY: 0
 });
 ```
 
