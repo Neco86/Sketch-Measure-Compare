@@ -15,9 +15,10 @@ import sketchMeasureCompare from 'sketch-measure-compare';
 sketchMeasureCompare.init();
 // or init with options
 sketchMeasureCompare.init({
-  zIndex: 10000,
-  enableDomRulers: false,
-  enableTextReplace: false
+    zIndex: 10000,
+    enableDomRulers: false,
+    enableTextReplace: false,
+    offsetY: 0
 });
 ```
 
@@ -28,7 +29,8 @@ script.onload = () => {
     sketchMeasureCompare.init({
       zIndex: 10000,
       enableDomRulers: false,
-      enableTextReplace: false
+      enableTextReplace: false,
+      offsetY: 0
     });
 };
 script.src = "https://unpkg.com/sketch-measure-compare@latest/index.min.js";
