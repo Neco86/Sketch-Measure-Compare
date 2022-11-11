@@ -37,9 +37,6 @@ script.src = "https://unpkg.com/sketch-measure-compare@latest/index.min.js";
 document.head.appendChild(script);
 ```
 
-#### Method 3: Using Chrome Extension
-Download and unzip: https://github.com/Neco86/Sketch-Measure-Compare/archive/refs/heads/extension.zip
-
 Available CDN:
 
 - https://unpkg.com/sketch-measure-compare@latest/index.min.js
@@ -48,6 +45,9 @@ Available CDN:
 Backup:
 
 - https://neco86.github.io/Sketch-Measure-Compare/index.min.js
+
+#### Method 3: Using Chrome Extension
+Download and unzip: https://github.com/Neco86/Sketch-Measure-Compare/archive/refs/heads/extension.zip
 
 ### Step2: Click the UI button to switch page
 
