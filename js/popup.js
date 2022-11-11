@@ -30,7 +30,7 @@ const setConfig = (config) => {
 };
 
 const DEFAULT_CONFIG = {
-    zIndex: 1000,
+    zIndex: 10000,
     offsetY: 0,
     enableDomRulers: false,
     enableTextReplace: false,
