@@ -5,24 +5,7 @@ A tool for easy comparison of UI and web pages
 ## Guide
 
 ### Step1: Installation
-#### Method 1: Using npm
-```shell
-npm install sketch-measure-compare
-```
-
-```js
-import sketchMeasureCompare from 'sketch-measure-compare';
-sketchMeasureCompare.init();
-// or init with options
-sketchMeasureCompare.init({
-    zIndex: 10000,
-    enableDomRulers: false,
-    enableTextReplace: false,
-    offsetY: 0
-});
-```
-
-#### Method 2: Using CDN in HTML (Recommend)
+#### Method 1: Using CDN in HTML (Recommend)
 ```js
 const script = document.createElement('script');
 script.onload = () => {
@@ -46,8 +29,25 @@ Backup:
 
 - https://neco86.github.io/Sketch-Measure-Compare/index.min.js
 
-#### Method 3: Using Chrome Extension
+#### Method 2: Using Chrome Extension
 Download and unzip: https://github.com/Neco86/Sketch-Measure-Compare/archive/refs/heads/extension.zip
+
+#### Method 3: Using npm
+```shell
+npm install sketch-measure-compare
+```
+
+```js
+import sketchMeasureCompare from 'sketch-measure-compare';
+sketchMeasureCompare.init();
+// or init with options
+sketchMeasureCompare.init({
+    zIndex: 10000,
+    enableDomRulers: false,
+    enableTextReplace: false,
+    offsetY: 0
+});
+```
 
 ### Step2: Click the UI button to switch page
 
