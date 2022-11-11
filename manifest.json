@@ -1,0 +1,27 @@
+{
+    "manifest_version": 3,
+    "name": "Sketch Measure Compare",
+    "version": "1.0.0",
+    "description": "extension for sketch measure compare",
+    "icons": {
+        "16": "img/icon.png",
+        "48": "img/icon.png",
+        "128": "img/icon.png"
+    },
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+            "matches": ["http://*/*", "https://*/*"],
+            "js": ["js/content.js"]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": ["js/load.js", "index.min.js"],
+            "matches": ["http://*/*", "https://*/*"]
+        }
+    ],
+    "permissions": ["activeTab", "scripting", "tabs", "storage"]
+}
