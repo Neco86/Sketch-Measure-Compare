@@ -9,6 +9,8 @@ A tool for easy comparison of UI and web pages
 ```js
 const script = document.createElement('script');
 script.onload = () => {
+    // sketchMeasureCompare.init();
+    // or init with options
     sketchMeasureCompare.init({
       zIndex: 10000,
       enableDomRulers: false,
@@ -40,13 +42,6 @@ npm install sketch-measure-compare
 ```js
 import sketchMeasureCompare from 'sketch-measure-compare';
 sketchMeasureCompare.init();
-// or init with options
-sketchMeasureCompare.init({
-    zIndex: 10000,
-    enableDomRulers: false,
-    enableTextReplace: false,
-    offsetY: 0
-});
 ```
 
 ### Step2: Click the UI button to switch page
