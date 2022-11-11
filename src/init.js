@@ -54,7 +54,7 @@ export default (config) => {
         borderRadius: '3px',
         color: '#fff',
         height: '26px',
-        lineHeight: '26px',
+        lineHeight: '22px',
         fontSize: '16px',
         userSelect: 'none',
         webkitUserSelect: 'none',
