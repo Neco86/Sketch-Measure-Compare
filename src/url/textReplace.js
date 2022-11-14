@@ -15,8 +15,10 @@ export default () => {
                         'BODY',
                         'NOSCRIPT',
                     ].includes(t.nodeName) &&
-                    t.childNodes.length === 1 &&
-                    t.childNodes[0].nodeName === '#text'
+                    Array.from(t.childNodes).filter(
+                        (t) =>
+                            t.nodeName === '#text' || t.nodeName === '#comment'
+                    ).length === t.childNodes.length
             )
             .forEach((textNode) => {
                 if (textNode.isInitSketchMeasureTextPlaceNode) {
