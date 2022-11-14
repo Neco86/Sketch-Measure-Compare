@@ -13,7 +13,7 @@ const config = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'index.min.js',
         library: 'sketchMeasureCompare',
-        libraryTarget: 'umd',
+        libraryTarget: 'window',
         libraryExport: 'default',
     },
     devServer: {
