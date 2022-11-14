@@ -26,6 +26,8 @@
             if (iframe.contentDocument) {
                 const src = iframe.src;
                 iframe.contentWindow.onbeforeunload = () => {};
+                iframe.style.top = `${sketchMeasureCompare.config.offsetY}px`;
+                iframe.style.height = `calc(100% - ${sketchMeasureCompare.config.offsetY}px)`;
                 iframe.src = '';
                 iframe.src = src;
             }
