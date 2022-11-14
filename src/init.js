@@ -58,6 +58,7 @@ export default (config) => {
         fontSize: '16px',
         userSelect: 'none',
         webkitUserSelect: 'none',
+        boxSizing: 'border-box',
     });
     toggleBtn.innerText = 'UI';
 
