@@ -12,9 +12,16 @@
         <div>Test Page</div>
         <br>
         <span>Test Page</span>
+        <br>
+        <div>
+            <div id="jump">Jump Page<div></div></div>
+        </div>
         <script>
             window['root'].onclick = () => {
                 console.log('click');
+            }
+            window['jump'].onclick = () => {
+                location.href = 'http://jump'
             }
         </script>
     </body>

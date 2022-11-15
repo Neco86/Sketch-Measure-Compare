@@ -3,6 +3,8 @@ interface Config {
     enableDomRulers?: Boolean;
     enableTextReplace?: Boolean;
     offsetY?: number;
+    width?: number;
+    enableBlockClose?: boolean;
 }
 
 interface SketchMeasureCompare {
