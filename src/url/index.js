@@ -44,10 +44,37 @@ export default () => {
                     return res;
                 })
                 .then((res) => {
-                    res = res.replace(
-                        '</head>',
-                        `<script src="${window.top.sketchMeasureCompare.sketchMeasure}"></script></head>`
-                    );
+                    res = res
+                        .replace(
+                            '</head>',
+                            `<script src="${window.top.sketchMeasureCompare.sketchMeasure}"></script></head>`
+                        )
+                        .replace(
+                            'meaxure.render(data)',
+                            `
+                            meaxure.render({
+                                ...data,
+                                artboards: (data.artboards || []).map((t) => {
+                                    const width = window.top.sketchMeasureCompare.config.width || t.width;
+                                    const scale = width / t.width;
+                                    return {
+                                        ...t,
+                                        width,
+                                        height: t.height * scale,
+                                        layers: (t.layers || []).map((l) => ({
+                                            ...l,
+                                            rect: {
+                                                x: l.rect.x * scale,
+                                                y: l.rect.y * scale,
+                                                width: l.rect.width * scale,
+                                                height: l.rect.height * scale,
+                                            },
+                                        })),
+                                    };
+                                }),
+                            });
+                            `
+                        );
                     return res;
                 })
                 .then((res) => {
@@ -60,6 +87,7 @@ export default () => {
         }
     };
     const handleClear = () => {
+        window.top.sketchMeasureCompare.config.enableBlockClose = false;
         URL.revokeObjectURL(iframe.src);
         fileList.forEach((file) => {
             URL.revokeObjectURL(file.url);
@@ -82,4 +110,24 @@ export default () => {
             handleClear();
         }
     });
+    const configHandler = {
+        get(target, property) {
+            return target[property];
+        },
+        set(target, property, value) {
+            target[property] = value;
+            if (property === 'width') {
+                const enableBlockClose = window.top.sketchMeasureCompare.config.enableBlockClose;
+                window.top.sketchMeasureCompare.config.enableBlockClose = false;
+                const src = iframe.src;
+                iframe.src = '';
+                iframe.src = src;
+                window.top.sketchMeasureCompare.config.enableBlockClose = enableBlockClose;
+            }
+        },
+    };
+    window.top.sketchMeasureCompare.config = new Proxy(
+        window.top.sketchMeasureCompare.config,
+        configHandler
+    );
 };

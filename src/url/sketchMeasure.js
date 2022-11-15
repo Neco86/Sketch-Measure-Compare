@@ -37,9 +37,6 @@ export default () => {
                 cursor: 'pointer',
             });
             clear.onclick = () => {
-                if (iframe.contentDocument) {
-                    iframe.contentWindow.onbeforeunload = () => {};
-                }
                 window.parent.postMessage(
                     {
                         msg: 'CLEAR UI',
@@ -64,6 +61,46 @@ export default () => {
                     height: `calc(100% - ${offsetY}px)`
                 });
             }
+            let isInjectRules = false;
+            let isInjectTextReplace = false;
+            const configHandler = {
+                get(target, property) {
+                    return target[property];
+                },
+                set(target, property, value) {
+                    target[property] = value;
+                    if (property === 'offsetY') {
+                        setOffsetY();
+                    }
+                    if (property === 'enableBlockClose') {
+                        if (iframe.contentDocument) {
+                            iframe.contentWindow.onbeforeunload = () => {
+                                return value ? false : void 0;
+                            };
+                        }
+                    }
+                    if (property === 'enableDomRulers' && !isInjectRules) {
+                        const enableBlockClose = window.top.sketchMeasureCompare.config.enableBlockClose;
+                        window.top.sketchMeasureCompare.config.enableBlockClose = false;
+                        const src = iframe.src;
+                        iframe.src = '';
+                        iframe.src = src;
+                        window.top.sketchMeasureCompare.config.enableBlockClose = enableBlockClose;
+                    }
+                    if (property === 'enableTextReplace' && !isInjectTextReplace) {
+                        const enableBlockClose = window.top.sketchMeasureCompare.config.enableBlockClose;
+                        window.top.sketchMeasureCompare.config.enableBlockClose = false;
+                        const src = iframe.src;
+                        iframe.src = '';
+                        iframe.src = src;
+                        window.top.sketchMeasureCompare.config.enableBlockClose = enableBlockClose;
+                    }
+                },
+            };
+            window.top.sketchMeasureCompare.config = new Proxy(
+                window.top.sketchMeasureCompare.config,
+                configHandler
+            );
             setOffsetY();
             setStyle(iframe, {
                 border: 'none',
@@ -75,16 +112,23 @@ export default () => {
             iframe.onload = () => {
                 setOffsetY();
                 if (iframe.contentDocument) {
-                    iframe.contentWindow.onbeforeunload = () => false;
                     if (
-                        window.top.sketchMeasureCompare.config.enableDomRulers
+                        window.top.sketchMeasureCompare.config.enableBlockClose
+                    ) {
+                        iframe.contentWindow.onbeforeunload = () => false;
+                    }
+                    isInjectRules = window.top.sketchMeasureCompare.config.enableDomRulers;
+                    if (
+                        isInjectRules
                     ) {
                         const script = document.createElement('script');
                         script.src = window.top.sketchMeasureCompare.rulers;
                         iframe.contentDocument.head.appendChild(script);
+                        isInjectRules = true;
                     }
+                    isInjectTextReplace = window.top.sketchMeasureCompare.config.enableTextReplace;
                     if (
-                        window.top.sketchMeasureCompare.config.enableTextReplace
+                        isInjectTextReplace
                     ) {
                         const script = document.createElement('script');
                         script.src =
@@ -103,18 +147,18 @@ export default () => {
             iframeSrc.placeholder = 'url';
             iframeSrc.value = iframe.src;
             iframeSrc.oninput = (e) => {
-                if (iframe.contentDocument) {
-                    iframe.contentWindow.onbeforeunload = () => {};
-                }
+                const enableBlockClose = window.top.sketchMeasureCompare.config.enableBlockClose;
+                window.top.sketchMeasureCompare.config.enableBlockClose = false;
                 iframe.src = e.target.value;
+                window.top.sketchMeasureCompare.config.enableBlockClose = enableBlockClose;
             };
             iframeSrc.onkeyup = (e) => {
                 if (e.key === 'Enter') {
-                    if (iframe.contentDocument) {
-                        iframe.contentWindow.onbeforeunload = () => {};
-                    }
+                    const enableBlockClose = window.top.sketchMeasureCompare.config.enableBlockClose;
+                    window.top.sketchMeasureCompare.config.enableBlockClose = false;
                     iframe.src = '';
                     iframe.src = e.target.value;
+                    window.top.sketchMeasureCompare.config.enableBlockClose = enableBlockClose;
                 }
             };
 
@@ -201,11 +245,11 @@ export default () => {
                 const { width, height, marginTop } = screen.style;
 
                 if (width !== newScreen.style.width) {
-                    if (iframe.contentDocument) {
-                        iframe.contentWindow.onbeforeunload = () => {};
-                    }
+                    const enableBlockClose = window.top.sketchMeasureCompare.config.enableBlockClose;
+                    window.top.sketchMeasureCompare.config.enableBlockClose = false;
                     iframe.src = '';
                     iframe.src = iframeSrc.value;
+                    window.top.sketchMeasureCompare.config.enableBlockClose = enableBlockClose;
                 }
 
                 setStyle(newScreen, {

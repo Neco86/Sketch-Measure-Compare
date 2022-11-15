@@ -25,7 +25,6 @@ export default () => {
                     return;
                 }
                 textNode.isInitSketchMeasureTextPlaceNode = true;
-                textNode.contentEditable = true;
                 textNode.addEventListener('contextmenu', (e) => {
                     e.preventDefault();
                 });
@@ -43,10 +42,27 @@ export default () => {
                         );
                     }
                 });
+                textNode.addEventListener('mouseenter', (e) => {
+                    e.target.contentEditable = !!window.top.sketchMeasureCompare.config.enableTextReplace;
+                });
+                textNode.addEventListener('mouseleave', (e) => {
+                    if (!e.target.isFocus) {
+                        e.target.contentEditable = false;
+                    }
+                });
+                textNode.addEventListener('focus', (e) => {
+                    e.target.isFocus = true;
+                });
+                textNode.addEventListener('blur', (e) => {
+                    e.target.isFocus = false;
+                    e.target.contentEditable = false;
+                });
                 textNode.onclick = (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    return false;
+                    if (window.top.sketchMeasureCompare.config.enableTextReplace) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }
                 };
             });
     }
