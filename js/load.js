@@ -11,31 +11,6 @@
         window.postMessage({ to: 'content', msg, payload });
     };
 
-    const applyConfig = () => {
-        if (!window.top.sketchMeasureCompare?.config) {
-            return;
-        }
-        try {
-            const iframe = Array
-                .from(document.querySelectorAll('iframe'))
-                .filter(t => t.src === window.top.sketchMeasureCompare.html)[0]
-                .contentDocument
-                .querySelectorAll('iframe')[0]
-                .contentDocument
-                .querySelectorAll('iframe')[0];
-            if (iframe.contentDocument) {
-                const src = iframe.src;
-                iframe.contentWindow.onbeforeunload = () => {};
-                iframe.style.top = `${sketchMeasureCompare.config.offsetY}px`;
-                iframe.style.height = `calc(100% - ${sketchMeasureCompare.config.offsetY}px)`;
-                iframe.src = '';
-                iframe.src = src;
-            }
-        } catch (error) {
-            // do nothing
-        }
-    }
-
     window.addEventListener('message', (e) => {
         const { msg, to, payload } = e.data || {};
         if (to === 'load') {
@@ -55,10 +30,10 @@
                         );
                         if (window.top.sketchMeasureCompare?.config) {
                             Object.keys(config).forEach((key) => {
-                                window.top.sketchMeasureCompare.config[key] =
-                                    config[key];
+                                if (window.top.sketchMeasureCompare.config[key] !== config[key]) {
+                                    window.top.sketchMeasureCompare.config[key] = config[key];
+                                }
                             });
-                            applyConfig();
                         } else {
                             window.top.sketchMeasureCompare.init(config);
                         }

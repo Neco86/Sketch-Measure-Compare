@@ -21,19 +21,27 @@ const sendMsg2Content = ({ msg, payload }) => {
     );
 };
 
+const DEFAULT_CONFIG = {
+    zIndex: 10000,
+    width: 0,
+    offsetY: 0,
+    enableDomRulers: false,
+    enableTextReplace: false,
+};
+
 const setConfig = (config) => {
+    config.zIndex = +config.zIndex || DEFAULT_CONFIG.zIndex;
+    config.width = +config.width || DEFAULT_CONFIG.width;
+    config.offsetY = +config.offsetY || DEFAULT_CONFIG.offsetY;
+    config.enableDomRulers = !!config.enableDomRulers;
+    config.enableTextReplace = !!config.enableTextReplace;
+
     zIndex.value = config.zIndex;
+    width.value = config.width;
     offsetY.value = config.offsetY;
     enableDomRulers.checked = config.enableDomRulers;
     enableTextReplace.checked = config.enableTextReplace;
     chrome.storage.local.set({ sketchMeasureCompareConfig: config });
-};
-
-const DEFAULT_CONFIG = {
-    zIndex: 10000,
-    offsetY: 0,
-    enableDomRulers: false,
-    enableTextReplace: false,
 };
 
 const getConfig = (config) => {
@@ -72,16 +80,18 @@ chrome.runtime.onMessage.addListener((req) => {
     }
 });
 
+
 fetch(chrome.runtime.getURL('package.json')).then(res => res.json()).then(res => {
     version.innerHTML = `v${res.version}`;
 })
 
 apply.onclick = () => {
     const config = {
-        zIndex: +zIndex.value || 10000,
-        offsetY: +offsetY.value || 0,
-        enableDomRulers: enableDomRulers.checked,
-        enableTextReplace: enableTextReplace.checked,
+        zIndex: +zIndex.value || DEFAULT_CONFIG.zIndex,
+        width: +width.value || DEFAULT_CONFIG.width,
+        offsetY: +offsetY.value || DEFAULT_CONFIG.offsetY,
+        enableDomRulers: !!enableDomRulers.checked,
+        enableTextReplace: !!enableTextReplace.checked,
     };
     setConfig(config);
     sendMsg2Content({
