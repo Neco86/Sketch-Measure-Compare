@@ -5,16 +5,43 @@ export default (config) => {
         return;
     }
     isInit = true;
-    const zIndex  = config?.zIndex ?? 10000;
+    const zIndex = config?.zIndex ?? 10000;
     const enableDomRulers = config?.enableDomRulers ?? false;
     const enableTextReplace = config?.enableTextReplace ?? false;
     const offsetY = config?.offsetY ?? 0;
-    window.top.sketchMeasureCompare.config = {
+    const width = config?.width ?? 0;
+    const enableBlockClose = config?.enableBlockClose ?? true;
+    const finalConfig = {
         zIndex,
         enableDomRulers,
         enableTextReplace,
-        offsetY
+        offsetY,
+        width,
+        enableBlockClose,
     };
+    const configHandler = {
+        get(target, property) {
+            return target[property];
+        },
+        set(target, property, value) {
+            target[property] = value;
+            if (property === 'zIndex') {
+                setStyle(iframe, {
+                    zIndex: `${value}`,
+                });
+                setStyle(toggleBtnWrapper, {
+                    zIndex: `${value}`,
+                });
+                setStyle(toggleBtn, {
+                    zIndex: `${value}`,
+                });
+            }
+        },
+    };
+    window.top.sketchMeasureCompare.config = new Proxy(
+        finalConfig,
+        configHandler
+    );
     const iframe = document.createElement('iframe');
     const setStyle = (ele, obj) => {
         Object.keys(obj).forEach((key) => {
