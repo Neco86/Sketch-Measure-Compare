@@ -14,16 +14,20 @@ export default () => {
                 resolution: 1,
                 unit: 'px',
                 colorFormat: 'color-hex',
-                artboards: imgs.filter(Boolean).map(({img,name}) => ({
-                    notes: [],
-                    layers: [],
-                    name: name,
-                    pageName: '',
-                    width: img.width,
-                    height: img.height,
-                    imagePath: img.src,
-                    imageIconPath: img.src,
-                })),
+                artboards: imgs.filter(Boolean).map(({img,name}) => {
+                    const width = window.top.sketchMeasureCompare.config.width || img.width;
+                    const scale = width / img.width;
+                    return {
+                        notes: [],
+                        layers: [],
+                        name: name,
+                        pageName: '',
+                        width,
+                        height: img.height * scale,
+                        imagePath: img.src,
+                        imageIconPath: img.src,
+                    }
+                }),
             };
             meaxure.render(data);
         });
