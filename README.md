@@ -13,6 +13,7 @@ script.onload = () => {
     // or init with options
     sketchMeasureCompare.init({
       zIndex: 10000,
+      width: 0,
       enableDomRulers: false,
       enableTextReplace: false,
       offsetY: 0
