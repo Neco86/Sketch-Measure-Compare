@@ -37,15 +37,6 @@ Download and unzip: https://github.com/Neco86/Sketch-Measure-Compare/archive/ref
 
 [Load the unpacked extension](https://developer.chrome.com/docs/extensions/mv3/getstarted/development-basics/#load-unpacked)
 
-#### Method 3: Using npm
-```shell
-npm install -D sketch-measure-compare
-```
-
-```js
-import sketchMeasureCompare from 'sketch-measure-compare';
-sketchMeasureCompare.init();
-```
 
 ### Step2: Click the UI button to switch page
 
