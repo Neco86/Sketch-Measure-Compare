@@ -39,7 +39,7 @@ Download and unzip: https://github.com/Neco86/Sketch-Measure-Compare/archive/ref
 
 #### Method 3: Using npm
 ```shell
-npm install sketch-measure-compare
+npm install -D sketch-measure-compare
 ```
 
 ```js
