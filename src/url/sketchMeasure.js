@@ -124,7 +124,6 @@ export default () => {
                         const script = document.createElement('script');
                         script.src = window.top.sketchMeasureCompare.rulers;
                         iframe.contentDocument.head.appendChild(script);
-                        isInjectRules = true;
                     }
                     isInjectTextReplace = window.top.sketchMeasureCompare.config.enableTextReplace;
                     if (
