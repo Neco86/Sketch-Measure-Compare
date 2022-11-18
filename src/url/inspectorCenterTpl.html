@@ -4,12 +4,12 @@
     <div class="context">
         <div class="item" data-label="大小:">
             <label data-label="宽度">
-                <input type="text" value="${props.width}" readonly="readonly" />
+                <input type="text" value="${width}" readonly="readonly" />
             </label>
             <label data-label="高度">
                 <input
                     type="text"
-                    value="${props.height}"
+                    value="${height}"
                     readonly="readonly"
                 />
             </label>
@@ -18,14 +18,14 @@
             <label data-label="上">
                 <input
                     type="text"
-                    value="${props.paddingTop}"
+                    value="${paddingTop}"
                     readonly="readonly"
                 />
             </label>
             <label data-label="右">
                 <input
                     type="text"
-                    value="${props.paddingRight}"
+                    value="${paddingRight}"
                     readonly="readonly"
                 />
             </label>
@@ -34,14 +34,14 @@
             <label data-label="下">
                 <input
                     type="text"
-                    value="${props.paddingBottom}"
+                    value="${paddingBottom}"
                     readonly="readonly"
                 />
             </label>
             <label data-label="左">
                 <input
                     type="text"
-                    value="${props.paddingLeft}"
+                    value="${paddingLeft}"
                     readonly="readonly"
                 />
             </label>
@@ -50,14 +50,14 @@
             <label data-label="上">
                 <input
                     type="text"
-                    value="${props.marginTop}"
+                    value="${marginTop}"
                     readonly="readonly"
                 />
             </label>
             <label data-label="右">
                 <input
                     type="text"
-                    value="${props.marginRight}"
+                    value="${marginRight}"
                     readonly="readonly"
                 />
             </label>
@@ -66,14 +66,14 @@
             <label data-label="下">
                 <input
                     type="text"
-                    value="${props.marginBottom}"
+                    value="${marginBottom}"
                     readonly="readonly"
                 />
             </label>
             <label data-label="左">
                 <input
                     type="text"
-                    value="${props.marginLeft}"
+                    value="${marginLeft}"
                     readonly="readonly"
                 />
             </label>
@@ -82,7 +82,7 @@
             <label>
                 <input
                     type="text"
-                    value="${props.borderRadius}"
+                    value="${borderRadius}"
                     readonly="readonly"
                 />
             </label>
@@ -91,43 +91,43 @@
             <label data-label="宽度">
                 <input
                     type="text"
-                    value="${props.borderWidth}"
+                    value="${borderWidth}"
                     readonly="readonly"
                 />
             </label>
             <label data-label="类型">
                 <input
                     type="text"
-                    value="${props.borderStyle}"
+                    value="${borderStyle}"
                     readonly="readonly"
                 />
             </label>
         </div>
         <div class="item" data-label="">
             <span class="color-bg">
-                <span style="background-color: ${props.borderColor};">
+                <span color="${borderColor}">
                 </span>
             </span>
             <label data-label="颜色">
-                <input type="text" value="${props.borderColor}" readonly="readonly" />
+                <input type="text" value="${borderColor}" readonly="readonly" />
             </label>
         </div>
         <div class="item" data-label="不透明度:">
             <label>
                 <input
                     type="text"
-                    value="${props.opacity}"
+                    value="${opacity}"
                     readonly="readonly"
                 />
             </label>
         </div>
         <div class="item" data-label="背景色:">
             <span class="color-bg">
-                <span style="background-color: ${props.backgroundColor};">
+                <span color="${backgroundColor}">
                 </span>
             </span>
             <label>
-                <input type="text" value="${props.backgroundColor}" readonly="readonly" />
+                <input type="text" value="${backgroundColor}" readonly="readonly" />
             </label>
         </div>
     </div>
@@ -139,25 +139,25 @@
             <label>
                 <input
                     type="text"
-                    value="${props.fontFamily}"
+                    value="${fontFamily}"
                     readonly="readonly"
                 />
             </label>
         </div>
         <div class="item" data-label="颜色:">
             <span class="color-bg">
-                <span style="background-color: ${props.color};">
+                <span color="${color}">
                 </span>
             </span>
             <label>
-                <input type="text" value="${props.color}" readonly="readonly" />
+                <input type="text" value="${color}" readonly="readonly" />
             </label>
         </div>
         <div class="item" data-label="大小:">
             <label>
                 <input
                     type="text"
-                    value="${props.fontSize}"
+                    value="${fontSize}"
                     readonly="readonly"
                 />
             </label>
@@ -166,7 +166,7 @@
             <label>
                 <input
                     type="text"
-                    value="${props.lineHeight}"
+                    value="${lineHeight}"
                     readonly="readonly"
                 />
             </label>
@@ -175,7 +175,7 @@
             <label>
                 <input
                     type="text"
-                    value="${props.fontWeight}"
+                    value="${fontWeight}"
                     readonly="readonly"
                 />
             </label>
@@ -184,7 +184,7 @@
             <label>
                 <input
                     type="text"
-                    value="${props.letterSpacing}"
+                    value="${letterSpacing}"
                     readonly="readonly"
                 />
             </label>
@@ -193,7 +193,7 @@
             <label>
                 <input
                     type="text"
-                    value="${props.textAlign}"
+                    value="${textAlign}"
                     readonly="readonly"
                 />
             </label>
@@ -205,7 +205,7 @@
                     rows="2"
                     readonly="readonly"
                     style="font-family: PingFang SC, sans-serif"
-                >${props.innerText}</textarea
+                >${innerText}</textarea
                 >
             </label>
         </div>

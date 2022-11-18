@@ -46,7 +46,7 @@ export default () => {
             background-image: linear-gradient(45deg, #dddadc 25%, transparent 25%, transparent 75%, #dddadc 75%, #dddadc), linear-gradient(45deg, #dddadc 25%, transparent 25%, transparent 75%, #dddadc 75%, #dddadc);
             background-size: 12px 12px;
             background-position: 0 0, 6px 6px;
-            border-radius: 2px 0 0 2px;
+            border-radius: 2px;
             overflow: hidden;
             width: 24px;
             height: 24px;
@@ -521,7 +521,7 @@ export default () => {
                         return num;
                     }
                     return `${res}px`;
-                }
+                };
                 if (node && inspectorCenterTpl && inspector) {
                     inspector.className = inspector.className + ' active';
                     const styles = getComputedStyle(node);
@@ -551,9 +551,24 @@ export default () => {
                         backgroundColor: styles.backgroundColor,
                         innerText: node.innerText.trim(),
                     };
-                    inspectorCenter.innerHTML = eval(
-                        '`' + inspectorCenterTpl + '`'
-                    );
+                    inspectorCenter.innerHTML = inspectorCenterTpl
+                        .split(/([a-z]+="\${.*?}")/)
+                        .map((str) => {
+                            if (/([a-z]+="\${.*?}")/.test(str)) {
+                                const res = str.match(/([a-z]+)="\${(.*?)}"/);
+                                const key = res[1];
+                                const value = res[2];
+                                if (key === 'color') {
+                                    return `style="background-color: ${props[value]};"`;
+                                }
+                                if (key === 'value') {
+                                    return `value="${props[value]}"`;
+                                }
+                            }
+                            return str;
+                        })
+                        .join('')
+                        .replace('${innerText}', props.innerText);
                 }
             }
         };
@@ -568,7 +583,7 @@ export default () => {
         wrapper.addEventListener('click', () => {
             inspector.className = inspector.className.replace('active', '');
         });
-    }
+    };
 
     const init = () => {
         if (isInit) {
@@ -593,6 +608,7 @@ export default () => {
             watchChosen();
         }
     };
+    setTimeout(init, 0);
     setTimeout(init, 220);
     setTimeout(init, 500);
     setTimeout(init, 1000);
