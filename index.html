@@ -5,24 +5,44 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Sketch Measure Compare</title>
+        <style>
+            body {
+                height: 200vh;
+            }
+            #root {
+                width: 100px;
+                padding: 1px 2px 3px 4px;
+                margin: 2px 4px 8px 10px;
+                border-radius: 13px;
+                opacity: 0.7;
+                background-color: rgba(0, 0, 0, 0.8);
+                color: rgba(255, 255, 255, 0.9);
+                line-height: 20px;
+                font-size: 18px;
+                border: 10px double green;
+            }
+        </style>
     </head>
     <body>
         <div id="root">Test Page</div>
-        <br>
+        <br />
         <div>Test Page</div>
-        <br>
+        <br />
         <span>Test Page</span>
-        <br>
+        <br />
         <div>
-            <div id="jump">Jump Page<div></div></div>
+            <div id="jump">
+                Jump Page
+                <div></div>
+            </div>
         </div>
         <script>
             window['root'].onclick = () => {
                 console.log('click');
-            }
+            };
             window['jump'].onclick = () => {
-                location.href = 'http://jump'
-            }
+                location.href = 'http://jump';
+            };
         </script>
     </body>
 </html>
