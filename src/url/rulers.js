@@ -22,6 +22,7 @@ export default () => {
                 }
                 node.isInitSketchMeasureRulersNode = true;
                 node.addEventListener('mouseenter', () => {
+                    window.top.sketchMeasureCompare.hover = node;
                     if (window.top.sketchMeasureCompare.config.enableDomRulers) {
                         window.parent.postMessage(
                             {
@@ -33,6 +34,7 @@ export default () => {
                     }
                 });
                 node.addEventListener('mouseleave', () => {
+                    window.top.sketchMeasureCompare.hover = null;
                     if (window.top.sketchMeasureCompare.config.enableDomRulers) {
                         window.parent.postMessage(
                             {

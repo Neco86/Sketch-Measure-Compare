@@ -1,0 +1,213 @@
+<h2>DOM</h2>
+<section>
+    <h3>属性</h3>
+    <div class="context">
+        <div class="item" data-label="大小:">
+            <label data-label="宽度">
+                <input type="text" value="${props.width}" readonly="readonly" />
+            </label>
+            <label data-label="高度">
+                <input
+                    type="text"
+                    value="${props.height}"
+                    readonly="readonly"
+                />
+            </label>
+        </div>
+        <div class="item" data-label="内边距:">
+            <label data-label="上">
+                <input
+                    type="text"
+                    value="${props.paddingTop}"
+                    readonly="readonly"
+                />
+            </label>
+            <label data-label="右">
+                <input
+                    type="text"
+                    value="${props.paddingRight}"
+                    readonly="readonly"
+                />
+            </label>
+        </div>
+        <div class="item" data-label=" ">
+            <label data-label="下">
+                <input
+                    type="text"
+                    value="${props.paddingBottom}"
+                    readonly="readonly"
+                />
+            </label>
+            <label data-label="左">
+                <input
+                    type="text"
+                    value="${props.paddingLeft}"
+                    readonly="readonly"
+                />
+            </label>
+        </div>
+        <div class="item" data-label="外边距:">
+            <label data-label="上">
+                <input
+                    type="text"
+                    value="${props.marginTop}"
+                    readonly="readonly"
+                />
+            </label>
+            <label data-label="右">
+                <input
+                    type="text"
+                    value="${props.marginRight}"
+                    readonly="readonly"
+                />
+            </label>
+        </div>
+        <div class="item" data-label=" ">
+            <label data-label="下">
+                <input
+                    type="text"
+                    value="${props.marginBottom}"
+                    readonly="readonly"
+                />
+            </label>
+            <label data-label="左">
+                <input
+                    type="text"
+                    value="${props.marginLeft}"
+                    readonly="readonly"
+                />
+            </label>
+        </div>
+        <div class="item" data-label="圆角:">
+            <label>
+                <input
+                    type="text"
+                    value="${props.borderRadius}"
+                    readonly="readonly"
+                />
+            </label>
+        </div>
+        <div class="item" data-label="边框:">
+            <label data-label="宽度">
+                <input
+                    type="text"
+                    value="${props.borderWidth}"
+                    readonly="readonly"
+                />
+            </label>
+            <label data-label="类型">
+                <input
+                    type="text"
+                    value="${props.borderStyle}"
+                    readonly="readonly"
+                />
+            </label>
+        </div>
+        <div class="item" data-label="">
+            <span class="color-bg">
+                <span style="background-color: ${props.borderColor};">
+                </span>
+            </span>
+            <label data-label="颜色">
+                <input type="text" value="${props.borderColor}" readonly="readonly" />
+            </label>
+        </div>
+        <div class="item" data-label="不透明度:">
+            <label>
+                <input
+                    type="text"
+                    value="${props.opacity}"
+                    readonly="readonly"
+                />
+            </label>
+        </div>
+        <div class="item" data-label="背景色:">
+            <span class="color-bg">
+                <span style="background-color: ${props.backgroundColor};">
+                </span>
+            </span>
+            <label>
+                <input type="text" value="${props.backgroundColor}" readonly="readonly" />
+            </label>
+        </div>
+    </div>
+</section>
+<section>
+    <h3>字体</h3>
+    <div class="context">
+        <div class="item" data-label="字体:">
+            <label>
+                <input
+                    type="text"
+                    value="${props.fontFamily}"
+                    readonly="readonly"
+                />
+            </label>
+        </div>
+        <div class="item" data-label="颜色:">
+            <span class="color-bg">
+                <span style="background-color: ${props.color};">
+                </span>
+            </span>
+            <label>
+                <input type="text" value="${props.color}" readonly="readonly" />
+            </label>
+        </div>
+        <div class="item" data-label="大小:">
+            <label>
+                <input
+                    type="text"
+                    value="${props.fontSize}"
+                    readonly="readonly"
+                />
+            </label>
+        </div>
+        <div class="item" data-label="行高:">
+            <label>
+                <input
+                    type="text"
+                    value="${props.lineHeight}"
+                    readonly="readonly"
+                />
+            </label>
+        </div>
+        <div class="item" data-label="字重:">
+            <label>
+                <input
+                    type="text"
+                    value="${props.fontWeight}"
+                    readonly="readonly"
+                />
+            </label>
+        </div>
+        <div class="item" data-label="字间距:">
+            <label>
+                <input
+                    type="text"
+                    value="${props.letterSpacing}"
+                    readonly="readonly"
+                />
+            </label>
+        </div>
+        <div class="item" data-label="对齐方式:">
+            <label>
+                <input
+                    type="text"
+                    value="${props.textAlign}"
+                    readonly="readonly"
+                />
+            </label>
+        </div>
+        <div class="item">
+            <label data-label="内容">
+                <textarea
+                    id="content"
+                    rows="2"
+                    readonly="readonly"
+                    style="font-family: PingFang SC, sans-serif"
+                >${props.innerText}</textarea
+                >
+            </label>
+        </div>
+    </div>
+</section>
