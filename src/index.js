@@ -6,6 +6,7 @@ import html from './url/index.html';
 import tplIndex from './url/tpl';
 import tpl from './url/tpl.html';
 import textReplace from './url/textReplace';
+import inspectorCenterTpl from './url/inspectorCenterTpl.html'
 import init from './init';
 
 class SketchMeasureCompare {
@@ -21,6 +22,7 @@ SketchMeasureCompare.prototype.html = html;
 SketchMeasureCompare.prototype.tplIndex = tplIndex;
 SketchMeasureCompare.prototype.tpl = tpl;
 SketchMeasureCompare.prototype.textReplace = textReplace;
+SketchMeasureCompare.prototype.inspectorCenterTpl = inspectorCenterTpl;
 
 if (!window.top.sketchMeasureCompare) {
     const sketchMeasureCompare = new SketchMeasureCompare();
