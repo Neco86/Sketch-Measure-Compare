@@ -207,6 +207,7 @@ export default () => {
         newScreen = screen.cloneNode(false);
         setStyle(newScreen, {
             backgroundImage: '',
+            overflowY: 'hidden'
         });
         newScreen.appendChild(iframe);
         newScreen.appendChild(newRulers);
@@ -494,7 +495,7 @@ export default () => {
     };
 
     const watchChosen = () => {
-        document.onkeyup = (e) => {
+        window.addEventListener('keyup', e => {
             if (e.key === 'c' && !flowMode.checked) {
                 const node = window.top.sketchMeasureCompare.hover;
                 wrapper.click();
@@ -571,8 +572,20 @@ export default () => {
                         .replace('${innerText}', props.innerText);
                 }
             }
-        };
+        });
     };
+
+    const watchRefresh = () => {
+        window.addEventListener('keyup', e => {
+            if (e.key === 'r' && !flowMode.checked) {
+                closeBlock();
+                const src = iframe.src;
+                iframe.src = '';
+                iframe.src = src;
+                resetBlock();
+            }
+        });
+    }
 
     const initInspector = () => {
         fetch(window.top.sketchMeasureCompare.inspectorCenterTpl)
@@ -606,6 +619,7 @@ export default () => {
             watchScreenChange();
             listenMessage();
             watchChosen();
+            watchRefresh();
         }
     };
     setTimeout(init, 0);
