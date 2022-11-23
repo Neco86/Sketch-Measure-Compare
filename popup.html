@@ -105,17 +105,31 @@
                 box-shadow: 0 2px #0000000b;
                 color: #fff;
                 cursor: pointer;
+                margin-right: 10px;
+                width: 62px;
+                text-align: center;
             }
 
             button:active {
                 opacity: 0.5;
             }
 
+            button:disabled {
+                border-color: #ccc;
+                background-color: #ccc;
+                cursor: not-allowed;
+                opacity: 1;
+            }
+
             .button-wrapper {
                 display: flex;
                 align-items: center;
-                justify-content: center;
                 margin-top: 20px;
+                padding-left: 95px;
+            }
+
+            #diff {
+                display: none;
             }
         </style>
     </head>
@@ -152,6 +166,7 @@
         </label>
         <div class="button-wrapper">
             <button id="apply">Apply</button>
+            <button id="diff">Diff</button>
         </div>
         <script src="./js/popup.js"></script>
     </body>
