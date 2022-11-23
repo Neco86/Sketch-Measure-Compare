@@ -115,4 +115,9 @@
             }
         }
     });
+
+    sendMsgToContent({
+        msg: 'getConfig',
+        payload: window.top.sketchMeasureCompare?.config,
+    });
 })();

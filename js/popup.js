@@ -15,7 +15,7 @@ const sendMsg2Content = ({ msg, payload }) => {
                 chrome.tabs.sendMessage(tabs[0].id, {
                     msg,
                     payload,
-                });
+                }, () => chrome.runtime.lastError);
             }
         }
     );
