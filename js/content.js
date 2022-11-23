@@ -11,7 +11,7 @@ const sendMsg2Load = ({ msg, payload }) => {
 };
 
 const sendMsg2Popup = ({ msg, payload }) => {
-    chrome.runtime.sendMessage({ msg, payload });
+    chrome.runtime.sendMessage({ msg, payload }, () => chrome.runtime.lastError);
 };
 
 chrome.runtime.onMessage.addListener((req) => {
