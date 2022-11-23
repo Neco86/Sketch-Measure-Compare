@@ -58,6 +58,11 @@ const getConfig = (config) => {
 sendMsg2Content({
     msg: 'getConfig',
 });
+sendMsg2Content({
+    msg: 'getScreenInfo',
+});
+
+let screenInfo = null;
 
 chrome.runtime.onMessage.addListener((req) => {
     const { msg, payload } = req || {};
@@ -77,6 +82,10 @@ chrome.runtime.onMessage.addListener((req) => {
                 document.head.appendChild(style);
             }, 100);
         });
+    }
+    if (msg === 'getScreenInfo') {
+        diff.style.display = 'initial';
+        screenInfo = JSON.parse(payload);
     }
 });
 
@@ -104,3 +113,91 @@ apply.onclick = () => {
     });
     window.close();
 };
+
+diff.onclick = () => {
+    if (screenInfo && !diff.disabled) {
+        diff.disabled = true;
+        chrome.tabs.captureVisibleTab({format: 'png'}, res => {
+            const img = document.createElement('img');
+            img.src = res;
+            img.onload = () => {
+                const {win, ui, web, title} = screenInfo;
+                const scale = img.width / win.width;
+                Object.keys(win).forEach(key => {
+                    win[key] = win[key] * scale;
+                });
+                Object.keys(ui).forEach(key => {
+                    ui[key] = ui[key] * scale;
+                });
+                Object.keys(web).forEach(key => {
+                    web[key] = web[key] * scale;
+                });
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d', {willReadFrequently: true});
+                canvas.width = ui.width * 3;
+                canvas.height = ui.height;
+                ctx.drawImage(
+                    img,
+                    ui.x,
+                    ui.y,
+                    ui.width,
+                    ui.height,
+                    0,
+                    0,
+                    ui.width,
+                    ui.height
+                );
+                ctx.drawImage(
+                    img,
+                    web.x,
+                    web.y,
+                    web.width,
+                    web.height,
+                    ui.width,
+                    0,
+                    web.width,
+                    web.height
+                );
+                const uiData = ctx.getImageData(
+                    0,
+                    0,
+                    ui.width,
+                    ui.height
+                );
+                const webData = ctx.getImageData(
+                    ui.width,
+                    0,
+                    ui.width,
+                    ui.height
+                );
+                const diffData = new ImageData(ui.width, ui.height);
+                for (let i = 0; i < diffData.data.length; i += 4) {
+                    const r = Math.abs(uiData.data[i] - webData.data[i]);
+                    const g = Math.abs(uiData.data[i + 1] - webData.data[i + 1]);
+                    const b = Math.abs(uiData.data[i + 2] - webData.data[i + 2]);
+                    const MAX = 256;
+                    const COLOR_MAX = 128;
+                    const isDiff = r + g + b > MAX || r > COLOR_MAX || g > COLOR_MAX || b > COLOR_MAX;
+                    diffData.data[i] = isDiff ? 255 : uiData.data[i];
+                    diffData.data[i + 1] = isDiff ? 0 : uiData.data[i+1];
+                    diffData.data[i + 2] = isDiff ? 255 : uiData.data[i+2];
+                    diffData.data[i + 3] = 255;
+                }
+                ctx.putImageData(diffData, ui.width * 2, 0);
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(0, 0, 50, 30);
+                ctx.fillRect(ui.width, 0, 70, 30);
+                ctx.fillRect(ui.width * 2, 0, 70, 30);
+                ctx.fillStyle = '#f00';
+                ctx.font = '20px Arial';
+                ctx.fillText('UI', 10, 22);
+                ctx.fillText('WEB', 10 + ui.width, 22);
+                ctx.fillText('DIFF', 10 + ui.width * 2, 22);
+                const a = document.createElement('a');
+                a.href = canvas.toDataURL();
+                a.download = `${title || 'page'}-diff.png`;
+                a.click();
+            }
+        })
+    }
+}
